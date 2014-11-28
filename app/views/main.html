@@ -1,1 +1,43 @@
-<div this ></div>
+<div class="item-list col-xs-4">
+  <div class="btn btn-droppable" ng-repeat="item in list5" ng-model='list5'>
+    <div class="btn btn-info btn-draggable" data-drag="{{item.drag}}" data-jqyoui-options="{revert: 'invalid'}"
+         ng-model="list5" jqyoui-draggable="{index: {{$index}},placeholder:'keep',animate:false}" >
+      {{item.title}}
+    </div>
+
+  </div>
+</div>
+
+<div class='build-list col-xs-8'>
+
+  <div class="btn btn-droppable" data-drop="true" ng-repeat="i in list5" ng-model='list1'
+       data-jqyoui-options="{accept:'.btn-draggable'}" jqyoui-droppable="{index: $index, onDrop: addItem(i)}">
+
+    <div class="btn btn-info btn-draggable" data-drag="list1[$index].drag" data-jqyoui-options="{revert: 'invalid'}"
+         ng-model="list1" jqyoui-draggable="{index: {{$index}},placeholder:true,animate:false}" ng-if="list1[$index].title">
+      {{list1[$index].title}}
+      <button class="btn btn-sm" ng-click="removeItem($index)"><span class="glyphicon glyphicon-remove"></span></button>
+    </div>
+
+  </div>
+</div>
+<button ng-click="report(list1)">report</button>
+
+<header>Firebase Chat Demo</header>
+
+<div class='example-chat-toolbar'>
+  <label for='nameInput'>Username:</label>
+  <input ng-model='name' type='text' id='nameInput' placeholder='enter a username...'>
+</div>
+
+<ul id='example-messages' class='example-chat-messages'>
+  <li ng-repeat='msg in messages'>
+    <strong class='example-chat-username'>{{msg.from}}</strong>
+    {{msg.body}}
+  </li>
+</ul>
+
+<input ng-model='msg' ng-keydown="addMessage($event)" type='text' id='messageInput'  placeholder='Type a message...'>
+
+
+

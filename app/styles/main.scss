@@ -48,16 +48,11 @@ body {
   margin: 30px 0;
 }
 
-/* Main marketing message and sign up button */
-.jumbotron {
-  text-align: center;
-  border-bottom: 1px solid #e5e5e5;
-}
+
 
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
   .container {
-    max-width: 730px;
   }
   /* Remove the padding we set earlier */
   .header,
@@ -74,4 +69,26 @@ body {
   .jumbotron {
     border-bottom: 0;
   }
+}
+
+.thumbnail { height: 280px !important; }
+
+.build-list{
+  margin-bottom: 20px;
+  border: 3px solid #000000
+}
+.item-list{
+  margin-bottom: 20px;
+  border: 3px solid #000000
+}
+.btn-droppable {
+  width: 100%;
+  height: 50px;
+  padding-left: 4px;
+  border: 1px solid #000000
+
+}
+.btn-draggable {
+  width: 100%;
+
 }

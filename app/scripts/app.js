@@ -9,27 +9,30 @@
  * Main module of the application.
  */
 var app = angular.module('workoutLogApp', [
-    'ngAnimate',
-    'ngAria',
-    'ngCookies',
-    'ngMessages',
-    'ngResource',
-    'ngRoute',
-    'ngSanitize',
-    'ngTouch'
-  ]);
+  'ngAnimate',
+  'ngAria',
+  'ngCookies',
+  'ngMessages',
+  'ngResource',
+  'ngRoute',
+  'ngSanitize',
+  'ngTouch',
+  'ngDragDrop',
+  'firebase',
+  'ngDraggable'
+]);
 
 app.config(function ($routeProvider) {
-    $routeProvider
-      .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl'
-      })
-      .otherwise({
-        redirectTo: '/'
-      });
-  });
+  $routeProvider
+    .when('/', {
+      templateUrl: 'views/main.html',
+      controller: 'MainCtrl'
+    })
+    .otherwise({
+      redirectTo: '/'
+    });
+});
 
 app.run(function($rootScope, $log){
-    $rootScope.$log = $log.debug;
-  });
+  $rootScope.$log = $log.debug;
+});
