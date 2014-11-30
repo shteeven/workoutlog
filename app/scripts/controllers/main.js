@@ -22,7 +22,6 @@ app.controller('MainCtrl', ['$scope', '$firebase', function ($scope, $firebase) 
 
   $scope.onDropComplete = function (drop, drag, evt) {
     var dropItem = $scope.draggableObjects[drop];
-    var storeIndex = $scope.draggableObjects.indexOf(holder);
     report(dropItem);
     var dragIndex = $scope.draggableObjects.indexOf(drag);
     var holder = dropItem;
