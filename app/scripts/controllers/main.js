@@ -20,7 +20,6 @@ app.controller('MainCtrl', ['$scope', '$firebase', function ($scope, $firebase) 
       $scope.fireData.$add(['one','two','three']);
     }
   }
-<<<<<<< HEAD
   function onDropComplete(index, item) {
     var itemIndex = $scope.fireData[0].indexOf(item);
     $scope.fireData[0].splice(itemIndex, 1);
@@ -29,25 +28,6 @@ app.controller('MainCtrl', ['$scope', '$firebase', function ($scope, $firebase) 
       console.log(ref.key() === $scope.fireData[0].$id); // true
     });
   }
-=======
-
-  $scope.onDropComplete = function (drop, drag, evt) {
-    var dropItem = $scope.draggableObjects[drop];
-    report(dropItem);
-    var dragIndex = $scope.draggableObjects.indexOf(drag);
-    var holder = dropItem;
-    $scope.draggableObjects[drop] = drag;
-    $scope.draggableObjects[dragIndex] = holder;
-    $scope.draggableObjects.$save(drop).then(function(ref) {
-      console.log($scope.draggableObjects.indexOf(holder));// true
-    }, function(){
-      console.log('fail');// false
-    }); //save
-    $scope.draggableObjects.$save(dragIndex); //save
-  };
-
-
->>>>>>> a1e690ca8d84b843b2d26a0ef369e82eb5f83318
   function report(message){
     console.log(message);
   }
