@@ -1,5 +1,5 @@
 
-<button ng-click="report(draggableObjects)">report</button>
+<button ng-click="report(fireData)">report</button>
     <input ng-model="itemNumber">
 <button ng-click="addItem(itemNumber)">add</button>
 
@@ -7,9 +7,9 @@
 <div class="row text-center" ng-controller="MainCtrl">
 
 <ul class="draglist">
-  <li ng-repeat="obj in draggableObjects" ng-drop="true" ng-drop-success="onDropComplete($index, $data,$event)">
-  <div ng-drag="true" ng-drag-data="obj" ng-class="obj.name" draggable="false">
-    {{obj.name}}
+  <li ng-repeat="obj in fireData[0]" ng-drop="true" ng-drop-success="onDropComplete($index, $data,$event)">
+  <div ng-drag="true" ng-drag-data="obj" ng-class="obj" draggable="false">
+    {{obj}}
   </div>
 </li>
 </ul>
