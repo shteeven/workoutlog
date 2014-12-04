@@ -15,6 +15,10 @@ body {
   padding-top: 20px;
   padding-bottom: 20px;
 }
+li{
+  list-style: none;
+
+}
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
 .header,
@@ -71,108 +75,47 @@ body {
   }
 }
 
-.thumbnail { height: 280px !important; }
-
-.build-list{
-  margin-bottom: 20px;
-  border: 3px solid #000000
+*{
+  -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
 }
-.item-list{
-  margin-bottom: 20px;
-  border: 3px solid #000000
-}
-.btn-droppable {
-  width: 100%;
-  height: 50px;
-  padding-left: 4px;
-  border: 1px solid #000000
-
-}
-.btn-draggable {
-  width: 100%;
-
-}
-
-
-* {
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-}
-
-[ng-drag] {
+[ng-drag]{
   -moz-user-select: -moz-none;
   -khtml-user-select: none;
   -webkit-user-select: none;
   -ms-user-select: none;
   user-select: none;
 }
-
-[ng-drag] {
-  width: 100px;
-  height: 100px;
-  background: rgba(255, 0, 0, 0.5);
-  color: white;
+.drag-object{
+  background: rgba(255,0,0, 0.5);
+  color:white;
   text-align: center;
-  padding-top: 40px;
-  display: block;
-  cursor: move;
 }
-
-[ng-drag].one {
-  background: rgba(255, 0, 0, 0.5);
-}
-
-[ng-drag].two {
-  background: rgba(0, 255, 0, 0.5);
-}
-
-[ng-drag].three {
-  background: rgba(0, 0, 255, 0.5);
-}
-
-[ng-drag].drag-over {
-  border: solid 1px red;
-}
-
-[ng-drag].dragging {
-  opacity: 0.5;
-}
-
-[ng-drop] {
-  background: rgba(0, 0, 0, 0.25);
-  text-align: center;
-  display: block;
-  position: relative;
-  padding: 20px;
-  width: 140px;
-  height: 140px;
-  float: left;
-}
-
-[ng-drop].drag-enter {
-  border: solid 5px red;
-}
-
-[ng-drop] span.title {
-  display: block;
+.drag-object [ng-drag]{
   position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 200px;
-  height: 20px;
-  margin-left: -100px;
-  margin-top: -10px;
+  top:0; left:0;
+
+}
+.draggable-objects li{
+  float:left;
+  display: block;
+  width: 100%;
+}
+.draggable-objects li div{
+  float:left;
+  display: block;
+  width: 100%;
+  cursor: move;
+
 }
 
-[ng-drop] div {
-  position: relative;
-  z-index: 2;
+.dragging{
+  background: rgba(128, 128, 128, .5);
+  opacity: .5;
 }
+.clone-holder .dragging{
+  width: 29.1% !important;
 
-.draglist {
-  display: inline-block;
-  margin: 0 auto;
 }
-
-
+.list-holder .dragging {
+  width: 61.5% !important;
+}
