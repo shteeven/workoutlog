@@ -19,7 +19,11 @@ app.controller('MainCtrl', ['$scope', '$firebase', function ($scope, $firebase) 
   //Use later to add workouts to main list
   function addItem(item){
     if(item){
-      $scope.fireData.$add([{name:'one',isNew:false}, {name:'two',isNew:false}, {name:'three',isNew:false}]);
+      var obj = {name: item,isNew:false};
+      $scope.fireData[0].push(obj);
+      $scope.fireData.$save(0).then(function(ref) {
+        console.log(ref.key() === $scope.fireData[0].$id); // true
+      });
     }
   }
   function onDropComplete(index, item) {
