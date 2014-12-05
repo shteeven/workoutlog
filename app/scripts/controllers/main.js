@@ -26,6 +26,15 @@ app.controller('MainCtrl', ['$scope', '$firebase', function ($scope, $firebase) 
       });
     }
   }
+
+  function deleteItem(index){
+    $scope.fireData[0].splice(index, 1);
+    $scope.fireData.$save(0).then(function(ref) {
+      console.log(ref.key() === $scope.fireData[0].$id); // true
+    });
+  }
+
+
   function onDropComplete(index, item) {
     if (item.isNew === false){
       var itemIndex = $scope.fireData[0].indexOf(item);
@@ -47,6 +56,7 @@ app.controller('MainCtrl', ['$scope', '$firebase', function ($scope, $firebase) 
     console.log(message);
   }
 
+  $scope.deleteItem = deleteItem;
   $scope.addItem = addItem;
   $scope.report = report;
   $scope.onDropComplete = onDropComplete;
