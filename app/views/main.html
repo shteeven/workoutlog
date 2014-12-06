@@ -16,12 +16,14 @@
 <div class="panel panel-primary col-xs-8">
   <ul class="list-group draggable-objects list-holder">
     <li ng-repeat="obj in fireData[0]" ng-drop="true" ng-drop-success="onDropComplete($index, $data,$event)" class="list-group-item drag-object">
-      <div>
-        <div ng-drag="true" ng-drag-data="obj" class="col-xs-1 outline grab"><span class="glyphicon glyphicon-th-list"></span></div>
+      <div >
+        <div class="col-xs-1"><div draggable="true" ng-drag="true" ng-drag-data="obj">{{$index+1}}</div></div>
         <div class="col-xs-4">{{obj.name}}</div>
         <div class="col-xs-2">{{obj.type}}type</div>
         <div class="col-xs-2"><input type="checkbox" ng-model="obj.completed"></div>
-        <div class="col-xs-2"><div class="col-xs-4">{{obj.sets}}</div><input class="col-xs-8" type="number"></div>
+        <div class="col-xs-2"><div class="col-xs-4">{{obj.sets}}</div>
+          <select ng-model="obj.sets" ng-options="i for n in range(1,100)" class="col-xs-8">
+          </select></div>
 
         <div class="col-xs-1">
           <button class="btn btn-group-xs btn-danger" ng-click="deleteItem($index)">

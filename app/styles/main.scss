@@ -110,10 +110,11 @@ button{
   height:45px;
   cursor: move;
 }
-.grab{
-  height:45px;
-  cursor: move;
+.draggable-objects li>div>div{
+  height: 100%;
 }
+
+
 .draggable-objects li>div div{
   border-right: 1px solid black;
 }
