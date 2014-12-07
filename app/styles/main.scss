@@ -9,74 +9,9 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
   color: #000;
   padding: 0.2em 0;
 }
-
-/* Space out content a bit */
-body {
-  padding-top: 20px;
-  padding-bottom: 20px;
+ul, li, button {
+  padding: 0;
 }
-li{
-  list-style: none;
-}
-button{
-  margin: 5px;
-}
-
-/* Everything but the jumbotron gets side spacing for mobile first views */
-.header,
-.marketing,
-.footer {
-  padding-left: 15px;
-  padding-right: 15px;
-}
-
-/* Custom page header */
-.header {
-  border-bottom: 1px solid #e5e5e5;
-
-  /* Make the masthead heading the same height as the navigation */
-  h3 {
-    margin-top: 0;
-    margin-bottom: 0;
-    line-height: 40px;
-    padding-bottom: 19px;
-  }
-}
-
-/* Custom page footer */
-.footer {
-  padding-top: 19px;
-  color: #777;
-  border-top: 1px solid #e5e5e5;
-}
-
-.container-narrow > hr {
-  margin: 30px 0;
-}
-
-
-
-/* Responsive: Portrait tablets and up */
-@media screen and (min-width: 768px) {
-  .container {
-  }
-  /* Remove the padding we set earlier */
-  .header,
-  .marketing,
-  .footer {
-    padding-left: 0;
-    padding-right: 0;
-  }
-  /* Space out the masthead */
-  .header {
-    margin-bottom: 30px;
-  }
-  /* Remove the bottom border on the jumbotron for visual effect */
-  .jumbotron {
-    border-bottom: 0;
-  }
-}
-
 *{
   -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
 }
@@ -87,18 +22,17 @@ button{
   -ms-user-select: none;
   user-select: none;
 }
-.drag-object{
+/*.drag-object{
   background: rgba(255,0,0, 0.5);
-  height: 45px;
   color: white;
   text-align: center;
-}
-.drag-object [ng-drag]{
+}*/
+/*.drag-object[ng-drag]{
   position: absolute;
   top:0; left:0;
 
-}
-.draggable-objects li{
+}*/
+/*.draggable-objects li{
   float:left;
   display: block;
   width: 100%;
@@ -114,7 +48,6 @@ button{
   height: 100%;
 }
 
-
 .draggable-objects li>div div{
   border-right: 1px solid black;
 }
@@ -127,10 +60,18 @@ button{
   width: 29.1% !important;
 
 }
+
+.list-group-item {
+  padding: 0.75em;
+}
 .list-holder .dragging {
   width: 61.5% !important;
 }
 
 .outline {
   border: dashed 4px orange;
+}*/
+[draggable] {
+  cursor: move;
+  background: red;
 }

@@ -11,7 +11,7 @@
   <!-- Small left panel -->
   <div class="panel panel-primary col-xs-4">
     <ul class="list-group draggable-objects clone-holder">
-      <li  ng-repeat="obj in draggableObjects" style="border: blue solid 1px" class="list-group-item drag-object" >
+      <li  ng-repeat="obj in draggableObjects" style="border: blue solid 1px" class="list-group-item drag-object">
         <div ng-drag="true" ng-drag-data="obj" style="border: #000000 solid 1px">{{obj.name}}</div>
       </li>
     </ul>
@@ -20,9 +20,9 @@
   <!-- Main right panel -->
   <div class="panel panel-primary col-xs-8">
     
-    <ul class="list-group draggable-objects list-holder">
+    <ul class="row list-group draggable-objects list-holder">
       
-      <li ng-repeat="obj in fireData[0]" ng-drop="true" ng-drop-success="onDropComplete($index, $data,$event)" class="list-group-item drag-object">
+      <li ng-repeat="obj in fireData[0]" ng-drop="true" ng-drop-success="onDropComplete($index, $data,$event)" class="col-xs-12 list-group-item drag-object">
         
         <div class="row">
           <div class="col-xs-1">
