@@ -74,4 +74,9 @@ ul, li, button {
 [draggable] {
   cursor: move;
   background: red;
+
+  span {
+    font: 1.8em/1.5;
+  }
 }
+
