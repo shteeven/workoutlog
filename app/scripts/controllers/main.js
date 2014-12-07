@@ -16,16 +16,17 @@ app.controller('MainCtrl', ['$scope', '$firebase', function ($scope, $firebase) 
   $scope.fireData = sync.$asArray();
 
   //Use later to add workouts to main list
-  function addItem(item){
-    if(item){
-      var obj = [
-        {name:'Standing Squat', type:'legs', completed: false, sets: 0, isNew:true},
-        {name:'Standing Squat', type:'legs', completed: false, sets: 0, isNew:true},
-        {name:'Standing Squat', type:'legs', completed: false, sets: 0, isNew:true},
-        {name:'Standing Squat', type:'legs', completed: false, sets: 0, isNew:true}
-      ];
-      $scope.fireData.$add(obj);
+  function addItem(name, type){
+    if(name && type){
+      var obj = {name: name, type:type, completed: false, sets: 0, isNew:true};
+      $scope.fireData[1].push(obj);
+      $scope.fireData.$save(1).then(function(ref) {
+        console.log(true); // true
+      });
+      $scope.itemName = "";
+      $scope.itemType = "";
     }
+
   }
 
   function deleteItem(index){
