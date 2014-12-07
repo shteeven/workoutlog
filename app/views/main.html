@@ -56,6 +56,63 @@
 
 </div> <!-- /.row -->
 
-<p>This is the end.</p>
+<table class="table-striped">
+  <thead>
+    <tr>
+      <th>Order</th>
+      <th>Order</th>
+      <th>Type</th>
+      <th>Radio</th>
+      <th>Select</th>
+      <th>Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+    
+    <tr ng-repeat="obj in fireData[0]" ng-drop="true" ng-drop-success="onDropComplete($index, $data,$event)">
+      
+      <td draggable="true" ng-drag="true" ng-drag-data="obj">
+        <span class="glyphicon glyphicon-move"></span>
+      </td>
+
+      <td>{{obj.name}}</td>
+
+      <td>{{obj.type}}type</td>
+
+      <td><input type="checkbox" ng-model="obj.completed"></td>
+
+      <td>
+        {{obj.sets}}
+        <select ng-model="obj.sets" ng-options="i for n in range(1,100)" class="col-xs-8">
+        </select>
+      </td>
+
+      <td>
+        <button class="btn btn-group-xs btn-danger" ng-click="deleteItem($index)">
+          <span class="glyphicon glyphicon-remove"></span>
+        </button>
+      </td>
+    </tr>
+
+    <tr>
+      <td>Hey</td>
+      <td>I'm</td>
+      <td>Another</td>
+      <td>Row</td>
+      <td>Should be</td>
+      <td>Striped</td>
+    </tr>
+
+    <tr>
+      <td>something</td>
+      <td>something</td>
+      <td>something</td>
+      <td>something</td>
+      <td>something</td>
+      <td>something</td>
+    </tr>
+
+  </tbody>
+</table>
 
 
