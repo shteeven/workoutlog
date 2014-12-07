@@ -14,7 +14,6 @@ app.controller('MainCtrl', ['$scope', '$firebase', function ($scope, $firebase) 
   var ref = new Firebase('https://fiery-torch-1810.firebaseio.com/');
   var sync = $firebase(ref);
   $scope.fireData = sync.$asArray();
-  $scope.draggableObjects = $scope.fireData[1];
 
   //Use later to add workouts to main list
   function addItem(item){
