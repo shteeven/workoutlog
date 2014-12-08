@@ -1,20 +1,24 @@
 <div class="row">
-  <div class="col-xs-12">
+  <button class="btn btn-default" ng-click="edit = !edit">{{edit ? "Finish":"Edit"}}</button>
+  <div ng-if="edit" class="col-xs-12">
     <button ng-click="report(fireData)">report</button>
-    <input ng-model="itemName">
-    <input ng-model="itemType">
-
-    <button ng-click="addItem(itemName, itemType)">add</button>
+    <input ng-model="itemName" placeholder="workout name">
+    <input ng-keyup="$event.keyCode == 13 ? addItem(itemName, itemType, itemReps) : null" ng-model="itemType" placeholder="workout type">
+    <input ng-keyup="$event.keyCode == 13 ? addItem(itemName, itemType, itemReps) : null" ng-model="itemReps" type="number" placeholder="default reps">
+    <button ng-click="addItem(itemName, itemType, itemReps)">add</button>
   </div>
 </div>
 
 <div class="row">
-  
   <!-- Small left panel -->
   <div class="panel panel-primary col-xs-12 col-sm-4">
     <ul class="list-group draggable-objects clone-holder">
-      <li  ng-repeat="obj in fireData[1]" style="border: blue solid 1px" class="list-group-item drag-object">
-        <div ng-drag="true" ng-drag-data="obj" style="border: #000000 solid 1px">{{obj.name}}</div>
+      <li  ng-repeat="obj in fireData[1] track by $index" ng-if="obj.name" class="list-group-item drag-object">
+        <div ng-drag="true" ng-drag-data="obj" class="">{{obj.name}}</div>
+        <div class="add-delete-button">
+          <div ng-if="!edit" class="glyphicon glyphicon-plus-sign" ng-click="addItemToList(obj)"></div>
+          <div ng-if="edit" class="glyphicon glyphicon-ban-circle" ng-click="deleteItem($index)"></div>
+        </div>
       </li>
     </ul>
   </div>
@@ -30,7 +34,7 @@
           <th>Type</th>
           <th>Radio</th>
           <th>Select</th>
-          <th>Delete</th>
+          <th> </th>
         </tr>
       </thead>
       <tbody>
@@ -43,20 +47,19 @@
 
           <td>{{obj.name}}</td>
 
-          <td>{{obj.type}}type</td>
+          <td>{{obj.type}}</td>
 
           <td><input type="checkbox" ng-model="obj.completed"></td>
 
           <td>
-            {{obj.sets}}
-            <select ng-model="obj.sets" ng-options="i for n in range(1,100)" class="col-xs-8">
-            </select>
+            {{obj.reps}}
+            <select ng-model="obj.reps" ng-options="n for n in range(1,100)" class="col-xs-8"></select>
           </td>
 
           <td>
-            <button class="btn btn-group-xs btn-danger" ng-click="deleteItem($index)">
+            <div class="" ng-click="deleteItemFromList($index)">
               <span class="glyphicon glyphicon-remove"></span>
-            </button>
+            </div>
           </td>
         </tr>
 

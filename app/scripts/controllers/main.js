@@ -15,27 +15,46 @@ app.controller('MainCtrl', ['$scope', '$firebase', function ($scope, $firebase) 
   var sync = $firebase(ref);
   $scope.fireData = sync.$asArray();
 
-  //Use later to add workouts to main list
-  function addItem(name, type){
+  //Use to add workouts to main list
+  function addItem(name, type, reps){
     if(name && type){
-      var obj = {name: name, type:type, completed: false, sets: 0, isNew:true};
-      $scope.fireData[1].push(obj);
-      $scope.fireData.$save(1).then(function(ref) {
-        console.log(true); // true
-      });
+      var obj = {name: name, type: type, completed: false, reps: reps, isNew:true};
+      var added = false;
+      var i = 0;
+      while (added == false){
+        if (!$scope.fireData[1][i]){
+          $scope.fireData[1][i] = obj;
+          $scope.fireData.$save(1).then(function(ref) {
+            console.log(ref.key() === $scope.fireData[1].$id); // true
+          });
+          added = true;
+        }
+        i++;
+      }
       $scope.itemName = "";
       $scope.itemType = "";
+      $scope.itemReps = "";
     }
-
+  }
+  function deleteItem(index){
+    delete $scope.fireData[1][index];
+    $scope.fireData.$save(1).then(function(ref) {
+      console.log(ref.key() === $scope.fireData[1].$id); // true
+    });
   }
 
-  function deleteItem(index){
+  function deleteItemFromList(index){
     $scope.fireData[0].splice(index, 1);
     $scope.fireData.$save(0).then(function(ref) {
       console.log(ref.key() === $scope.fireData[0].$id); // true
     });
   }
-
+  function addItemToList(item){
+    $scope.fireData[0].push(item);
+    $scope.fireData.$save(0).then(function(ref) {
+      console.log(true); // true
+    });
+  }
 
   function onDropComplete(index, item) {
     if (item.isNew === false){
@@ -58,8 +77,10 @@ app.controller('MainCtrl', ['$scope', '$firebase', function ($scope, $firebase) 
     console.log(message);
   }
 
-  $scope.deleteItem = deleteItem;
+  $scope.addItemToList = addItemToList;
+  $scope.deleteItemFromList = deleteItemFromList;
   $scope.addItem = addItem;
+  $scope.deleteItem = deleteItem;
   $scope.report = report;
   $scope.onDropComplete = onDropComplete;
 }]);
