@@ -42,7 +42,7 @@
         <tr ng-repeat="obj in fireData[0]" ng-drop="true" ng-drop-success="onDropComplete($index, $data,$event)">
           
           <td draggable="true" ng-drag="true" ng-drag-data="obj">
-            <span class="glyphicon glyphicon-move"></span>
+            <span class="glyphicon glyphicon-move"></span><div class="drag-name">{{obj.name}}</div>
           </td>
 
           <td>{{obj.name}}</td>
