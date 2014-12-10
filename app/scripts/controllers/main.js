@@ -50,6 +50,8 @@ app.controller('MainCtrl', ['$scope', '$firebase', function ($scope, $firebase) 
     });
   }
   function addItemToList(item){
+    item = angular.copy(item);
+    item.isNew = false;
     $scope.fireData[0].push(item);
     $scope.fireData.$save(0).then(function(ref) {
       console.log(true); // true
