@@ -1,5 +1,7 @@
 <div class="row">
+  
   <button class="btn btn-default" ng-click="edit = !edit">{{edit ? "Finish":"Edit"}}</button>
+  
   <div ng-if="edit" class="col-xs-12">
     <button ng-click="report(fireData)">report</button>
     <input ng-model="itemName" placeholder="workout name">
@@ -7,13 +9,14 @@
     <input ng-keyup="$event.keyCode == 13 ? addItem(itemName, itemType, itemReps) : null" ng-model="itemReps" type="number" placeholder="default reps">
     <button ng-click="addItem(itemName, itemType, itemReps)">add</button>
   </div>
+
 </div>
 
 <div class="row">
   <!-- Small left panel -->
   <div class="panel panel-primary col-xs-12 col-sm-4">
     <ul class="list-group draggable-objects clone-holder">
-      <li  ng-repeat="obj in fireData[1] track by $index" ng-if="obj.name" class="list-group-item drag-object">
+      <li ng-repeat="obj in fireData[1] track by $index" ng-if="obj.name" class="list-group-item drag-object">
         <div ng-drag="true" ng-drag-data="obj" class="">{{obj.name}}</div>
         <div class="add-delete-button">
           <div ng-if="!edit" class="glyphicon glyphicon-plus-sign" ng-click="addItemToList(obj)"></div>
@@ -57,9 +60,7 @@
           </td>
 
           <td>
-            <div class="btn-group-xs" ng-click="deleteItemFromList($index)">
-              <span class=" btn glyphicon glyphicon-remove"></span>
-            </div>
+            <span class="glyphicon glyphicon-remove" ng-click="deleteItemFromList($index)"></span>
           </td>
         </tr>
 
