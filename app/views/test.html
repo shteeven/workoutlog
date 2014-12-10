@@ -1,5 +1,10 @@
 <div class="row">
   <button class="btn btn-default" ng-click="edit = !edit">{{edit ? "Finish":"Edit"}}</button>
+  <button class="btn btn-default" ng-click="addTest()">add</button>
+
+
+
+
   <div ng-if="edit" class="col-xs-12">
     <button ng-click="report(fireData)">report</button>
     <input ng-model="itemName" placeholder="workout name">
@@ -39,7 +44,7 @@
       </thead>
       <tbody>
 
-      <tr ng-repeat="obj in fireData[0]" ng-drop="true" ng-drop-success="onDropComplete($index, $data,$event)">
+      <tr ng-repeat="obj in fireData" ng-drop="true" ng-drop-success="onDropComplete($index, $data,$event)">
 
         <td draggable="true" ng-drag="true" ng-drag-data="obj">
           <span class="glyphicon glyphicon-move"></span><div class="drag-name">{{obj.name}}</div>
@@ -49,11 +54,11 @@
 
         <td>{{obj.type}}</td>
 
-        <td><input type="checkbox" ng-model="obj.completed"></td>
+        <td><input type="checkbox" ng-change="saveChanges(obj)" ng-model="obj.completed"></td>
 
         <td>
           {{obj.reps}}
-          <select ng-model="obj.reps" ng-options="n for n in range(1,100)" class="col-xs-8"></select>
+          <select ng-model="obj.reps" ng-change="saveChanges(obj)" ng-options="n for n in range(1,100)" class="col-xs-8"></select>
         </td>
 
         <td>

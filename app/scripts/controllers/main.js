@@ -21,19 +21,17 @@ app.controller('MainCtrl', ['$scope', '$firebase', function ($scope, $firebase) 
       var obj = {name: name, type: type, completed: false, reps: reps, isNew:true};
       var added = false;
       var i = 0;
-      while (added == false){
+      while (added === false){
         if (!$scope.fireData[1][i]){
           $scope.fireData[1][i] = obj;
-          $scope.fireData.$save(1).then(function(ref) {
-            console.log(ref.key() === $scope.fireData[1].$id); // true
-          });
+          $scope.fireData.$save(1);
           added = true;
         }
         i++;
       }
-      $scope.itemName = "";
-      $scope.itemType = "";
-      $scope.itemReps = "";
+      $scope.itemName = '';
+      $scope.itemType = '';
+      $scope.itemReps = '';
     }
   }
   function deleteItem(index){
@@ -53,7 +51,7 @@ app.controller('MainCtrl', ['$scope', '$firebase', function ($scope, $firebase) 
     item = angular.copy(item);
     item.isNew = false;
     $scope.fireData[0].push(item);
-    $scope.fireData.$save(0).then(function(ref) {
+    $scope.fireData.$save(0).then(function() {
       console.log(true); // true
     });
   }
