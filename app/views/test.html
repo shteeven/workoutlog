@@ -3,8 +3,8 @@
 
   <div ng-if="edit" class="col-xs-12">
     <button ng-click="report(fireData)">report</button>
-    <input ng-model="itemName" placeholder="workout name">
-    <button ng-click="addTest(itemName)">add</button>
+    <input ng-keyup="$event.keyCode == 13 ? createItem(itemName) : null" ng-model="itemName" placeholder="workout name">
+    <button ng-click="createItem(itemName); itemName=''">add</button>
   </div>
 </div>
 
@@ -16,7 +16,7 @@
         <div ng-drag="true" ng-drag-data="obj" class="">{{obj.name}}</div>
         <div class="add-delete-button">
           <div ng-if="!edit" class="glyphicon glyphicon-plus-sign" ng-click="addItemToList(obj)"></div>
-          <div ng-if="edit" class="glyphicon glyphicon-ban-circle" ng-click="deleteItem($index)"></div>
+          <div ng-if="edit" class="glyphicon glyphicon-ban-circle" ng-click="deleteItemFromMainList(obj)"></div>
         </div>
       </li>
     </ul>
@@ -69,5 +69,3 @@
   </div> <!-- /Main right panel -->
 
 </div> <!-- /.row -->
-
-    <button ng-click="report(fireData)">asdf</button>

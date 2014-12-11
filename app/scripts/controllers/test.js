@@ -1,9 +1,7 @@
 'use strict';
-
-/**
- * Created by Shtav on 12/8/14.
- */
 /*global Firebase */
+/** Created by Shtav on 12/8/14. **/
+
 
 var app = angular.module('workoutLogApp');
 
@@ -15,34 +13,34 @@ app.controller('TestCtrl', ['$scope', '$firebase', function ($scope, $firebase) 
   var ref = new Firebase('https://finalize-test-app.firebaseIO.com/-JcrRUkOOoyEq7YGldxt');
   var ref2 = new Firebase('https://finalize-test-app.firebaseIO.com/Main-List');
 
-  //var ref = new Firebase('https://testapp-1494.firebaseIO.com/');
-  var sync = $firebase(ref);
-  var sync2 = $firebase(ref2);
+  var sync = $firebase(ref.orderByChild('priority'));
+  var sync2 = $firebase(ref2.orderByChild('priority'));
 
   $scope.fireData = sync.$asArray();
   $scope.fireData2 = sync2.$asArray();
-
 
   //=================
   //functions
   //=================
   function report(message){console.log(message);}
 
-  function compare(a, b) {
-    if (a.priority > b.priority) {return 1;}
-    if (a.priority < b.priority) {return -1;}
-    return 0;// a must be equal to b
-  }
-
-  function addTest(name){
+  function createItem(name){
     var priority;
-    if (!$scope.fireData2.length){
-      report('no items');
-      priority = 0;
-    } else {
-      priority = $scope.fireData2.length;
+    if(name) {
+      if (!$scope.fireData2.length) {
+        priority = 0;
+      } else {
+        priority = $scope.fireData2.length;
+      }
+      $scope.fireData2.$add({
+        name: name,
+        type: 'Virgo',
+        completed: false,
+        reps: 10,
+        isNew: true,
+        priority: priority
+      }, 0);
     }
-    $scope.fireData2.$add({name: name, type: 'Virgo', completed: false, reps: 10, isNew:true, priority: priority}, 0);
   }
 
   function addItemToList(item){
@@ -72,8 +70,6 @@ app.controller('TestCtrl', ['$scope', '$firebase', function ($scope, $firebase) 
           $scope.fireData.$save(dropIndex);
           dropIndex--;
         }
-      } else {
-        report('Same same!');
       }
     } else if (item.isNew){
       item = angular.copy(item);
@@ -90,26 +86,24 @@ app.controller('TestCtrl', ['$scope', '$firebase', function ($scope, $firebase) 
 
   function deleteItemFromList(item){ $scope.fireData.$remove(item); }
 
+  function deleteItemFromMainList(item){ $scope.fireData2.$remove(item); }
+
   function saveChanges(item){ $scope.fireData.$save(item).then(function(){report(item);}); }
 
 
   //=================
   //functions to scope
   //=================
-  $scope.addTest = addTest;
+  $scope.createItem = createItem;
   $scope.addItemToList = addItemToList;
   $scope.deleteItemFromList = deleteItemFromList;
+  $scope.deleteItemFromMainList = deleteItemFromMainList;
   $scope.saveChanges = saveChanges;
-  $scope.report = report;
   $scope.onDropComplete = onDropComplete;
-
+  $scope.report = report;
 
   //=================
   //actions (do stuff)
   //=================
-  $scope.fireData.sort(compare);
-
-  $scope.fireData.$watch(function() { $scope.fireData.sort(compare); });
-
 
 }]);
