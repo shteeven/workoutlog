@@ -8,9 +8,7 @@
   <div ng-if="edit" class="col-xs-12">
     <button ng-click="report(fireData)">report</button>
     <input ng-model="itemName" placeholder="workout name">
-    <input ng-keyup="$event.keyCode == 13 ? addItem(itemName, itemType, itemReps) : null" ng-model="itemType" placeholder="workout type">
-    <input ng-keyup="$event.keyCode == 13 ? addItem(itemName, itemType, itemReps) : null" ng-model="itemReps" type="number" placeholder="default reps">
-    <button ng-click="addItem(itemName, itemType, itemReps)">add</button>
+    <button ng-click="addTest(itemName)">add</button>
   </div>
 </div>
 
@@ -58,7 +56,7 @@
 
         <td>
           {{obj.reps}}
-          <select ng-model="obj.reps" ng-change="saveChanges(obj)" ng-options="n for n in range(1,100)" class="col-xs-8"></select>
+          <select ng-model="obj.reps" ng-change="saveChanges(obj)" ng-options="n for n in range(0,100)" class="col-xs-8"></select>
         </td>
 
         <td>
@@ -76,4 +74,4 @@
 
 </div> <!-- /.row -->
 
-    <button ng-click="reportThis()">asdf</button>
+    <button ng-click="report(fireData)">asdf</button>
