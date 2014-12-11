@@ -15,12 +15,14 @@
 <div class="row">
   <!-- Small left panel -->
   <div class="panel panel-primary col-xs-12 col-sm-4">
-    <ul class="list-group draggable-objects clone-holder">
+    <ul class="list-group draggable-objects">
       <li ng-repeat="obj in fireData[1] track by $index" ng-if="obj.name" class="list-group-item drag-object">
-        <div ng-drag="true" ng-drag-data="obj" class="">{{obj.name}}</div>
-        <div class="add-delete-button">
-          <div ng-if="!edit" class="glyphicon glyphicon-plus-sign" ng-click="addItemToList(obj)"></div>
-          <div ng-if="edit" class="glyphicon glyphicon-ban-circle" ng-click="deleteItem($index)"></div>
+        <div ng-drag="true" ng-drag-data="obj" class="outline">
+          {{obj.name}}
+          <div class="add-delete-button">
+            <div ng-if="!edit" class="glyphicon glyphicon-plus-sign" ng-click="addItemToList(obj)"></div>
+            <div ng-if="edit" class="glyphicon glyphicon-ban-circle" ng-click="deleteItem($index)"></div>
+          </div>
         </div>
       </li>
     </ul>
