@@ -22,6 +22,8 @@ var app = angular.module('workoutLogApp', [
   'ngDraggable'
 ]);
 
+app.constant('FIREBASE_URI', 'https://finalize-test-app.firebaseIO.com/');
+
 app.config(function ($routeProvider) {
   $routeProvider
     .when('/', {
