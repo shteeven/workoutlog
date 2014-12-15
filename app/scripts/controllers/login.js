@@ -15,7 +15,7 @@ app.controller('LoginCtrl', ['$scope', '$firebaseAuth', 'FIREBASE_URI', function
   var ref = new Firebase(FIREBASE_URI);
   $scope.authObj = $firebaseAuth(ref);
 
-  $scope.newUser = { email: '', password: '' };
+  $scope.user = { email: '', password: '' };
   $scope.currentUser  = null;
 
   //=================
@@ -56,7 +56,7 @@ app.controller('LoginCtrl', ['$scope', '$firebaseAuth', 'FIREBASE_URI', function
   }
 
   function resetForm() {
-    $scope.newUser = { email: '', password: '' };
+    $scope.user = { email: '', password: '' };
   }
 
 
