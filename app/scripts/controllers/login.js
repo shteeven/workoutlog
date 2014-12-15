@@ -7,7 +7,7 @@
 var app = angular.module('workoutLogApp');
 
 
-app.controller('MainCtrl', ['$scope', '$firebaseAuth', 'FIREBASE_URI', function ($scope, $firebaseAuth, FIREBASE_URI) {
+app.controller('LoginCtrl', ['$scope', '$firebaseAuth', 'FIREBASE_URI', function ($scope, $firebaseAuth, FIREBASE_URI) {
 
   //=================
   //assignments and declarations
