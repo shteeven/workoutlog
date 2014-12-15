@@ -12,13 +12,14 @@
   <!-- Small left panel -->
   <div class="panel panel-primary col-xs-12 col-sm-4">
     <ul class="list-group draggable-objects clone-holder">
-      <li  ng-repeat="obj in fireData2" class="list-group-item drag-object">
-        <div ng-drag="true" ng-drag-data="obj" class="">{{obj.name}}
-        <div class="add-delete-button">
+      <li  ng-repeat="obj in fireData2" class="row list-group-item drag-object">
+        <div class="col-xs-11">
+          <div ng-drag="true" ng-drag-data="obj">{{obj.name}}</div>
+        </div>
+        <div class="add-delete-button col-xs-1">
           <div ng-if="!edit" class="glyphicon glyphicon-plus-sign" ng-click="addItemToList(obj)"></div>
           <div ng-if="edit" class="glyphicon glyphicon-ban-circle" ng-click="deleteItemFromMainList(obj)"></div>
         </div>
-      </div>
       </li>
     </ul>
   </div>

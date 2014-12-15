@@ -11,76 +11,102 @@ var app = angular.module('workoutLogApp');
 
 app.controller('MainCtrl', ['$scope', '$firebase', function ($scope, $firebase) {
 
-  var ref = new Firebase('https://fiery-torch-1810.firebaseio.com/');
-  var sync = $firebase(ref);
+  //=================
+  //assignments and declarations
+  //=================
+  var ref = new Firebase('https://finalize-test-app.firebaseIO.com/-JcrRUkOOoyEq7YGldxt');
+  var ref2 = new Firebase('https://finalize-test-app.firebaseIO.com/Main-List');
+
+  var sync = $firebase(ref.orderByChild('priority'));
+  var sync2 = $firebase(ref2.orderByChild('priority'));
+
   $scope.fireData = sync.$asArray();
+  $scope.fireData2 = sync2.$asArray();
 
-  //Use to add workouts to main list
-  function addItem(name, type, reps){
-    if(name && type){
-      var obj = {name: name, type: type, completed: false, reps: reps, isNew:true};
-      var added = false;
-      var i = 0;
-      while (added === false){
-        if (!$scope.fireData[1][i]){
-          $scope.fireData[1][i] = obj;
-          $scope.fireData.$save(1);
-          added = true;
-        }
-        i++;
+  //=================
+  //functions
+  //=================
+  function report(message){console.log(message);}
+
+  function createItem(name){
+    var priority;
+    if(name) {
+      if (!$scope.fireData2.length) {
+        priority = 0;
+      } else {
+        priority = $scope.fireData2.length;
       }
-      $scope.itemName = '';
-      $scope.itemType = '';
-      $scope.itemReps = '';
+      $scope.fireData2.$add({
+        name: name,
+        type: 'Virgo',
+        completed: false,
+        reps: 10,
+        isNew: true,
+        priority: priority
+      }, 0);
     }
   }
-  function deleteItem(index){
-    delete $scope.fireData[1][index];
-    $scope.fireData.$save(1).then(function(ref) {
-      console.log(ref.key() === $scope.fireData[1].$id); // true
-    });
-  }
 
-  function deleteItemFromList(index){
-    $scope.fireData[0].splice(index, 1);
-    $scope.fireData.$save(0).then(function(ref) {
-      console.log(ref.key() === $scope.fireData[0].$id); // true
-    });
-  }
   function addItemToList(item){
-    item = angular.copy(item);
+    var priority;
+    if (!$scope.fireData.length){ priority = 0;
+    } else { priority = $scope.fireData.length; }
+
+    item.priority = priority;
     item.isNew = false;
-    $scope.fireData[0].push(item);
-    $scope.fireData.$save(0).then(function() {
-      console.log(true); // true
-    });
+    $scope.fireData.$add(item);
   }
 
-  function onDropComplete(index, item) {
-    if (item.isNew === false){
-      var itemIndex = $scope.fireData[0].indexOf(item);
-      $scope.fireData[0].splice(itemIndex, 1);
-      $scope.fireData[0].splice(index, 0, item);
-      $scope.fireData.$save(0).then(function(ref) {
-        console.log(ref.key() === $scope.fireData[0].$id); // true
-      });
-    } else if(item.isNew === true){
-      var newItem = angular.copy(item);
-      newItem.isNew = false;
-      $scope.fireData[0].splice(index, 0, newItem);
-      $scope.fireData.$save(0).then(function(ref) {
-        console.log(ref.key() === $scope.fireData[0].$id); // true
-      });
+  function onDropComplete(dropIndex, item) {
+    if (!item.isNew){
+      var dragIndex = $scope.fireData.indexOf(item);
+      item.priority = dropIndex;
+      $scope.fireData.$save(dragIndex);
+      if (dragIndex > dropIndex){
+        while ($scope.fireData[dropIndex] && dropIndex !== dragIndex ){
+          $scope.fireData[dropIndex].priority = dropIndex+1;
+          $scope.fireData.$save(dropIndex);
+          dropIndex++;
+        }
+      } else if(dragIndex < dropIndex){
+        while ($scope.fireData[dropIndex] && dropIndex !== dragIndex ){
+          $scope.fireData[dropIndex].priority = dropIndex-1;
+          $scope.fireData.$save(dropIndex);
+          dropIndex--;
+        }
+      }
+    } else if (item.isNew){
+      item = angular.copy(item);
+      item.isNew = false;
+      item.priority = dropIndex;
+      $scope.fireData.$add(item);
+      while ($scope.fireData[dropIndex]){
+        $scope.fireData[dropIndex].priority = dropIndex+1;
+        $scope.fireData.$save(dropIndex);
+        dropIndex++;
+      }
     }
   }
-  function report(message){
-    console.log(message);
-  }
 
+  function deleteItemFromList(item){ $scope.fireData.$remove(item); }
+
+  function deleteItemFromMainList(item){ $scope.fireData2.$remove(item); }
+
+  function saveChanges(item){ $scope.fireData.$save(item).then(function(){report(item);}); }
+
+
+  //=================
+  //functions to scope
+  //=================
+  $scope.createItem = createItem;
   $scope.addItemToList = addItemToList;
   $scope.deleteItemFromList = deleteItemFromList;
-  $scope.addItem = addItem;
-  $scope.deleteItem = deleteItem;
-  $scope.report = report;
+  $scope.deleteItemFromMainList = deleteItemFromMainList;
+  $scope.saveChanges = saveChanges;
   $scope.onDropComplete = onDropComplete;
+  $scope.report = report;
+
+  //=================
+  //actions (do stuff)
+  //=================
 }]);
