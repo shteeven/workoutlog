@@ -78,4 +78,10 @@ tr, .list-group-item {
 
 .table-striped > tbody > tr:nth-child(odd).drag-enter, .drag-enter {
   opacity: 0.5;
-} 
+}
+
+// Header styles
+.header {
+  font-size: 16px;
+  margin-bottom: 20px;
+}
