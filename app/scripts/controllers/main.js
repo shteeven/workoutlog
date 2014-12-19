@@ -28,6 +28,16 @@ app.controller('MainCtrl', ['$scope', '$firebase', function ($scope, $firebase) 
   //=================
   function report(message){console.log(message);}
 
+  function report1(){
+    report($scope.fireData);
+    report($scope.fireData[0].$priority);
+    $scope.fireData[0].$priority = 30;
+    $scope.fireData.$save(0);
+    report('again');
+    report($scope.fireData[0].$priority);
+
+  }
+
   function createItem(name){
     var priority;
     if(name) {
@@ -105,6 +115,7 @@ app.controller('MainCtrl', ['$scope', '$firebase', function ($scope, $firebase) 
   $scope.saveChanges = saveChanges;
   $scope.onDropComplete = onDropComplete;
   $scope.report = report;
+  $scope.report1 = report1;
 
   //=================
   //actions (do stuff)

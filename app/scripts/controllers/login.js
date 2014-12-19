@@ -36,6 +36,8 @@ app.controller('LoginCtrl', ['$scope', '$firebaseAuth', 'FIREBASE_URI', function
       });
     }).then(function(authData) {
       console.log("Logged in as:", authData.uid);
+      $scope.currentUser = authData.password;
+      report(authData);
       $scope.resetForm()
     }).catch(function(error) {
       console.error("Error: ", error);
@@ -47,7 +49,7 @@ app.controller('LoginCtrl', ['$scope', '$firebaseAuth', 'FIREBASE_URI', function
       email: userInfo.email,
       password: userInfo.password
     }).then(function(authData) {
-      $scope.currentUser = user;
+      $scope.currentUser = authData.password;
       $scope.resetForm();
       console.log("Logged in as:", authData.uid);
     }).catch(function(error) {
@@ -66,7 +68,7 @@ app.controller('LoginCtrl', ['$scope', '$firebaseAuth', 'FIREBASE_URI', function
   $scope.report = report;
   $scope.login = login;
   $scope.register = register;
-  $scope.resetForm = resetForm
+  $scope.resetForm = resetForm;
 
   //=================
   //actions (do stuff)
