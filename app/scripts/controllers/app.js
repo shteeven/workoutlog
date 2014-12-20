@@ -6,7 +6,7 @@
 
 var app = angular.module('workoutLogApp');
 
-app.controller('appCtrl', ['$scope', function ($scope) {
+app.controller('appCtrl', ['$scope', '$location', function ($scope, $location) {
 
   function range(min, max, step) {
     step = step || 1;
@@ -14,6 +14,8 @@ app.controller('appCtrl', ['$scope', function ($scope) {
     for (var i = min; i <= max; i += step) {input.push(i);}
     return input;
   }
-
+  $scope.isActive = function (viewLocation) {
+    return (viewLocation === $location.path());
+  };
   $scope.range = range;
 }]);

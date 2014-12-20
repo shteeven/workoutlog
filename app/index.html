@@ -25,9 +25,9 @@
       <div class="header">
         
         <ul class="nav nav-pills">
-          <li><a href="/">Workout Log</a></li>
-          <li><a href="#/test">Test</a></li>
-          <li><a href="#/login">Login</a></li>
+          <li ng-class="{ active: isActive('/')}"><a href="/">Workout Log</a></li>
+          <li ng-class="{ active: isActive('/test')}"><a href="#/test">Test</a></li>
+          <li ng-class="{ active: isActive('/login')}"><a href="#/login">Login</a></li>
         </ul>
 
       </div>
