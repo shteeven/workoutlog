@@ -17,8 +17,8 @@ app.controller('MainCtrl', ['$scope', '$firebase', function ($scope, $firebase) 
   var ref = new Firebase('https://finalize-test-app.firebaseIO.com/-JcrRUkOOoyEq7YGldxt');
   var ref2 = new Firebase('https://finalize-test-app.firebaseIO.com/Main-List');
 
-  var sync = $firebase(ref.orderByPriority());
-  var sync2 = $firebase(ref2.orderByPriority());
+  var sync = $firebase(ref.orderByChild('priority'));
+  var sync2 = $firebase(ref.orderByChild('priority'));
 
   $scope.fireData = sync.$asArray();
   $scope.fireData2 = sync2.$asArray();
@@ -28,15 +28,6 @@ app.controller('MainCtrl', ['$scope', '$firebase', function ($scope, $firebase) 
   //=================
   function report(message){console.log(message);}
 
-  function report1(){
-    report($scope.fireData);
-    report($scope.fireData[0].$priority);
-    $scope.fireData[0].$priority = 30;
-    $scope.fireData.$save(0);
-    report('again');
-    report($scope.fireData[0].$priority);
-
-  }
 
   function createItem(name){
     var priority;
@@ -115,7 +106,6 @@ app.controller('MainCtrl', ['$scope', '$firebase', function ($scope, $firebase) 
   $scope.saveChanges = saveChanges;
   $scope.onDropComplete = onDropComplete;
   $scope.report = report;
-  $scope.report1 = report1;
 
   //=================
   //actions (do stuff)

@@ -46,3 +46,17 @@ app.config(function ($routeProvider) {
 app.run(function($rootScope, $log){
   $rootScope.$log = $log.debug;
 });
+
+app.controller('appCtrl', ['$scope', '$location', function ($scope, $location) {
+
+  function range(min, max, step) {
+    step = step || 1;
+    var input = [];
+    for (var i = min; i <= max; i += step) {input.push(i);}
+    return input;
+  }
+  $scope.isActive = function (viewLocation) {
+    return (viewLocation === $location.path());
+  };
+  $scope.range = range;
+}]);
