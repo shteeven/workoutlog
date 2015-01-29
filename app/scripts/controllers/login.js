@@ -28,19 +28,19 @@ app.controller('LoginCtrl', ['$scope', '$firebaseAuth', 'FIREBASE_URI', function
     console.log(userInfo.email);
     console.log(userInfo.password);
     $scope.authObj.$createUser(userInfo.email, userInfo.password).then(function() {
-      console.log("User created successfully!");
+      console.log('User created successfully!');
 
       return $scope.authObj.$authWithPassword({
         email: userInfo.email,
         password: userInfo.password
       });
     }).then(function(authData) {
-      console.log("Logged in as:", authData.uid);
+      console.log('Logged in as:', authData.uid);
       $scope.currentUser = authData.password;
       report(authData);
-      $scope.resetForm()
+      $scope.resetForm();
     }).catch(function(error) {
-      console.error("Error: ", error);
+      console.error('Error: ', error);
     });
   }
 
@@ -51,9 +51,9 @@ app.controller('LoginCtrl', ['$scope', '$firebaseAuth', 'FIREBASE_URI', function
     }).then(function(authData) {
       $scope.currentUser = authData.password;
       $scope.resetForm();
-      console.log("Logged in as:", authData.uid);
+      console.log('Logged in as:', authData.uid);
     }).catch(function(error) {
-      console.error("Authentication failed:", error);
+      console.error('Authentication failed:', error);
     });
   }
 

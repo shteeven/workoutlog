@@ -18,7 +18,7 @@ app.controller('MainCtrl', ['$scope', '$firebase', function ($scope, $firebase) 
   var ref2 = new Firebase('https://finalize-test-app.firebaseIO.com/Main-List');
 
   var sync = $firebase(ref.orderByChild('priority'));
-  var sync2 = $firebase(ref.orderByChild('priority'));
+  var sync2 = $firebase(ref2.orderByChild('priority'));
 
   $scope.fireData = sync.$asArray();
   $scope.fireData2 = sync2.$asArray();
