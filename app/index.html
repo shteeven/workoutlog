@@ -29,18 +29,6 @@
           <li ng-class="{ active: isActive('/test')}"><a href="#/test">Test</a></li>
           <li ng-class="{ active: isActive('/login')}"><a href="#/login">Login</a></li>
         </ul>
-        <div ng-show="!user" class="row">
-          <div class="col-md-12">
-            <h2>Signup or login to ngroad</h2>
-            <div google-signin client-id={{clientId}} after-signin="signedIn(oauth)"></div>
-          </div>
-        </div>
-        <div ng-show="user" class="row">
-          <div class="col-md-12">
-            <h2>Sign-out</h2>
-            <button class="btn" ng-click="signout()">Sign Out</button>
-          </div>
-        </div>
 
       </div>
 
