@@ -1,6 +1,6 @@
 <ul class="nav nav-pills pull-right">
-  <li ng-cloak ng-hide="auth.authenticated"><a href="#login">Log in</a></li>
-  <li ng-cloak ng-show="auth.authenticated"><a ng-click="logout()">Log out</a></li>
+  <li ng-cloak ng-hide="user"><a href="#login">Log in</a></li>
+  <li ng-cloak ng-show="user"><a ng-click="logout()">Log out</a></li>
 </ul>
 <div ng-show="!user" class="row">
   <div class="col-md-12">

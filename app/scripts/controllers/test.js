@@ -5,7 +5,7 @@
 
 var app = angular.module('workoutLogApp');
 
-app.controller('TestCtrl', ['$scope', '$firebase', 'UserService', function ($scope, $firebase, UserService) {
+app.controller('TestCtrl', ['$scope', '$http', '$firebase', 'UserService', function ($scope, $http, $firebase, UserService) {
 
   $scope.clientId = '120364084226-vqepl1idscd31900dlo880enf9n9hbd2';
 
@@ -16,13 +16,13 @@ app.controller('TestCtrl', ['$scope', '$firebase', 'UserService', function ($sco
       console.log("Login Failed!", error);
     } else {
       console.log("Authenticated successfully with payload:", authData);
-      $scope.user = authData;
     }
   });
 
   function authDataCallback(authData) {
     if (authData) {
       console.log("User " + authData.uid + " is logged in with " + authData.provider);
+      $scope.user = authData;
     } else {
       console.log("User is logged out");
     }
@@ -44,6 +44,6 @@ app.controller('TestCtrl', ['$scope', '$firebase', 'UserService', function ($sco
   };
   */
 
-  $scope.signout = function(){disconnectUser($scope.oauth.access_token);};
+  $scope.signout = function(){disconnectUser($scope.user.google.access_token);};
 
 }]);
