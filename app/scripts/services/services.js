@@ -26,6 +26,10 @@ app.factory('UserService', function($q, $http) {
       if (service._user) {
         d.resolve(service._user);
       } else {
+        gapi.client.oauth2.success( function() {
+            console.log("here");
+          }
+        );
         gapi.client.oauth2.userinfo.get()
           .execute(function(e) {
             var email = e.email;

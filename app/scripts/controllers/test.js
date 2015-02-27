@@ -5,10 +5,28 @@
 
 var app = angular.module('workoutLogApp');
 
-app.controller('TestCtrl', ['$scope', '$firebase', function ($scope, $firebase) {
+app.controller('TestCtrl', ['$scope', '$firebase', 'UserService', function ($scope, $firebase, UserService) {
 
-  $scope.clientId = '120364084226-72omk2fl5mu05vdb765heq23r5lt9dh1';
+  $scope.clientId = '120364084226-vqepl1idscd31900dlo880enf9n9hbd2';
 
+  var ref = new Firebase("https://fiery-torch-1810.firebaseio.com");
+  ref.onAuth(authDataCallback);
+  ref.authWithOAuthPopup("google", function(error, authData) {
+    if (error) {
+      console.log("Login Failed!", error);
+    } else {
+      console.log("Authenticated successfully with payload:", authData);
+      $scope.user = authData;
+    }
+  });
+
+  function authDataCallback(authData) {
+    if (authData) {
+      console.log("User " + authData.uid + " is logged in with " + authData.provider);
+    } else {
+      console.log("User is logged out");
+    }
+  }
   function disconnectUser(access_token) {
     var revokeUrl = 'https://accounts.google.com/o/oauth2/revoke?token=' + access_token + '&callback=JSON_CALLBACK';
     $http.jsonp(revokeUrl)
@@ -16,6 +34,7 @@ app.controller('TestCtrl', ['$scope', '$firebase', function ($scope, $firebase) 
       .error(function(err) {console.log(err);});
   }
 
+  /*
   $scope.signedIn = function(oauth) {
     $scope.oauth = oauth;
     UserService.setCurrentUser(oauth)
@@ -23,6 +42,7 @@ app.controller('TestCtrl', ['$scope', '$firebase', function ($scope, $firebase) 
         $scope.user = user;
       });
   };
+  */
 
   $scope.signout = function(){disconnectUser($scope.oauth.access_token);};
 
