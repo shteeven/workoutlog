@@ -10,23 +10,18 @@ app.controller('TestCtrl', ['$scope', '$http', '$firebase', 'UserService', funct
   $scope.clientId = '120364084226-vqepl1idscd31900dlo880enf9n9hbd2';
 
   var ref = new Firebase("https://fiery-torch-1810.firebaseio.com");
-  ref.onAuth(authDataCallback);
-  ref.authWithOAuthPopup("google", function(error, authData) {
-    if (error) {
-      console.log("Login Failed!", error);
-    } else {
-      console.log("Authenticated successfully with payload:", authData);
-    }
-  });
 
-  function authDataCallback(authData) {
-    if (authData) {
-      console.log("User " + authData.uid + " is logged in with " + authData.provider);
-      $scope.user = authData;
-    } else {
-      console.log("User is logged out");
-    }
-  }
+  $scope.signIn = function(){
+    ref.authWithOAuthPopup("google", function(error, authData) {
+      if (error) {
+        console.log("Login Failed!", error);
+      } else {
+        console.log("Authenticated successfully with payload:", authData);
+        $scope.$apply(function(){$scope.user = authData});
+      }
+    });
+  };
+
   function disconnectUser(access_token) {
     var revokeUrl = 'https://accounts.google.com/o/oauth2/revoke?token=' + access_token + '&callback=JSON_CALLBACK';
     $http.jsonp(revokeUrl)
@@ -34,16 +29,10 @@ app.controller('TestCtrl', ['$scope', '$http', '$firebase', 'UserService', funct
       .error(function(err) {console.log(err);});
   }
 
-  /*
-  $scope.signedIn = function(oauth) {
-    $scope.oauth = oauth;
-    UserService.setCurrentUser(oauth)
-      .then(function(user) {
-        $scope.user = user;
-      });
-  };
-  */
-
   $scope.signout = function(){disconnectUser($scope.user.google.access_token);};
+
+  $scope.report = function(m){
+    console.log(m);
+  }
 
 }]);
