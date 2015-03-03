@@ -6,7 +6,7 @@
 var app = angular.module('workoutLogApp');
 
 app.controller('TestCtrl', ['$scope', '$http', '$firebase', function ($scope, $http, $firebase) {
-
+  $scope.uInput = '';
 
   //$scope.clientId = '120364084226-vqepl1idscd31900dlo880enf9n9hbd2';
 

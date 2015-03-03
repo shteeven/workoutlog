@@ -9,8 +9,9 @@
     <button class="btn" ng-click="signout()">Sign Out</button>
   </div>
 </div>
-<button ng-click="doIt()">report</button>
 
+<input ng-model="uInput" type="text">
+<button ng-click="doIt()">report</button>
 
 <div ng-show="user">
   <pre>{{ user | json }}</pre>
