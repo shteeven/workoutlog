@@ -43,7 +43,7 @@ app.config(function ($routeProvider) {
     });
 });
 
-app.controller('appCtrl', ['$scope', '$location', 'UserService', function ($scope, $location) {
+app.controller('appCtrl', ['$scope', '$location', function ($scope, $location) {
 
   function range(min, max, step) {
     step = step || 1;

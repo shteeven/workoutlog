@@ -9,6 +9,7 @@ var app = angular.module('workoutLogApp');
 app.factory('Exercise', function () {
 });
 
+/*
 app.factory('UserService', function($q, $http) {
   var service = {
     _user: null,
@@ -41,3 +42,4 @@ app.factory('UserService', function($q, $http) {
   };
   return service;
 });
+*/

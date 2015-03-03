@@ -5,9 +5,10 @@
 
 var app = angular.module('workoutLogApp');
 
-app.controller('TestCtrl', ['$scope', '$http', '$firebase', 'UserService', function ($scope, $http, $firebase, UserService) {
+app.controller('TestCtrl', ['$scope', '$http', '$firebase', function ($scope, $http, $firebase) {
 
-  $scope.clientId = '120364084226-vqepl1idscd31900dlo880enf9n9hbd2';
+
+  //$scope.clientId = '120364084226-vqepl1idscd31900dlo880enf9n9hbd2';
 
   var ref = new Firebase("https://fiery-torch-1810.firebaseio.com");
   var isNewUser = false;
@@ -51,23 +52,25 @@ app.controller('TestCtrl', ['$scope', '$http', '$firebase', 'UserService', funct
   function signout(){
     ref.unauth();
     disconnectUser($scope.user.google.accessToken);
-    $scope.user = undefined;
   }
   function log(m){
     console.log(m);
   }
-  $scope.doIt = function() {
-    var usersRef = ref.child("lists");
+  function doIt() {
+    var usersLists = ref.child("lists");
     var myObj = {
-      body: "asdfghjk",
+      body: $scope.uInput,
       userId: $scope.user.uid
     };
-    usersRef.push(myObj);
+    usersLists.push(myObj);
     console.log(myObj);
     console.log('what');
 
-  };
+  }
 
+
+
+  $scope.doIt = doIt;
   $scope.signout = signout;
   $scope.log = log;
   $scope.signIn = signIn;
