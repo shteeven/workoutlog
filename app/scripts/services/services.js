@@ -12,8 +12,8 @@ app.factory('Exercise', function () {
 app.factory('UserService', function($q, $http) {
   var service = {
     _user: null,
-    setCurrentUser: function(u) {
-      if (u && !u.error) {
+    setCurrentUser: function(e, s) {
+      if (s && !e) {
         return service.currentUser();
       } else {
         var d = $q.defer();

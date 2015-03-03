@@ -1,12 +1,7 @@
-<ul class="nav nav-pills pull-right">
-  <li ng-cloak ng-hide="user"><a href="#login">Log in</a></li>
-  <li ng-cloak ng-show="user"><a ng-click="logout()">Log out</a></li>
-</ul>
+
 <div ng-show="!user" class="row">
   <button class="btn btn-danger btn-large" ng-click="signIn()">Sign In!</button>
-  <div class="col-md-12">
-    <div google-signin client-id={{clientId}} after-signin="signedIn(oauth)"></div>
-  </div>
+
 </div>
 <div ng-show="user" class="row">
   <div class="col-md-12">
@@ -14,8 +9,10 @@
     <button class="btn" ng-click="signout()">Sign Out</button>
   </div>
 </div>
-<button ng-click="report(user)">report</button>
+<button ng-click="doIt()">report</button>
+
 
 <div ng-show="user">
   <pre>{{ user | json }}</pre>
 </div>
+
