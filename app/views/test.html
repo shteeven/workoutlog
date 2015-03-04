@@ -14,8 +14,9 @@
 <button ng-click="doIt()">report</button>
 <br>
 <button ng-click="log(sync2)">readData</button>
-<div ng-repeat="item in sync2">
-  <p>1 {{item.body}} </p>
+<div ng-repeat="items in sync2">
+  <p><h4>User ID: {{items.$id}} </h4></p>
+  <p ng-repeat="item in items">Body: {{item.body}}</p>
 </div>
 <br>
 
