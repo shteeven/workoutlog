@@ -8,10 +8,10 @@ var app = angular.module('workoutLogApp');
 app.controller('TestCtrl', ['$scope', '$http', '$firebase', function ($scope, $http, $firebase) {
   $scope.uInput = '';
 
-  //$scope.clientId = '120364084226-vqepl1idscd31900dlo880enf9n9hbd2';
+  var url = 'https://fiery-torch-1810.firebaseio.com';
 
-  var ref = new Firebase('https://fiery-torch-1810.firebaseio.com');
-  var ref2 = new Firebase('https://fiery-torch-1810.firebaseIO.com/lists');
+  var ref = new Firebase(url);
+  var ref2 = new Firebase(url+ '/lists');
 
   $scope.sync2 = $firebase(ref2).$asArray();
 
@@ -78,7 +78,13 @@ app.controller('TestCtrl', ['$scope', '$http', '$firebase', function ($scope, $h
     usersLists.push(myObj);
     console.log(myObj);
     console.log('what');
-
+  }
+  function deleteItem(user, key){
+    log(user);
+    log(key);
+    log(user[key]);
+    var itemRef = new Firebase(url + '/lists/' + user.$id + '/' + key);
+    itemRef.remove();
   }
 
 
@@ -89,5 +95,6 @@ app.controller('TestCtrl', ['$scope', '$http', '$firebase', function ($scope, $h
   $scope.signIn = signIn;
   $scope.report = report;
   $scope.deletePost = deletePost;
+  $scope.deleteItem = deleteItem;
 
 }]);
