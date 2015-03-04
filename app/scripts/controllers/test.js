@@ -10,8 +10,12 @@ app.controller('TestCtrl', ['$scope', '$http', '$firebase', function ($scope, $h
 
   //$scope.clientId = '120364084226-vqepl1idscd31900dlo880enf9n9hbd2';
 
-  var ref = new Firebase("https://fiery-torch-1810.firebaseio.com");
-  var isNewUser = false;
+  var ref = new Firebase('https://fiery-torch-1810.firebaseio.com');
+  var ref2 = new Firebase('https://fiery-torch-1810.firebaseIO.com/lists');
+
+  $scope.sync2 = $firebase(ref2).$asArray();
+
+
   ref.onAuth(function(authData) {
     if (authData && isNewUser) {
       // save the user's profile into Firebase so we can list users,
@@ -22,6 +26,15 @@ app.controller('TestCtrl', ['$scope', '$http', '$firebase', function ($scope, $h
       });
     }
   });
+  var isNewUser = false;
+
+  function report(){
+    console.log($scope.readData)
+  }
+
+  function deletePost(post){
+    var postKey = post.key();
+  }
   function signIn(){
     ref.authWithOAuthPopup("google", function(error, authData) {
       if (error) { console.log("Login Failed!", error);}
@@ -57,7 +70,7 @@ app.controller('TestCtrl', ['$scope', '$http', '$firebase', function ($scope, $h
     console.log(m);
   }
   function doIt() {
-    var usersLists = ref.child("lists");
+    var usersLists = ref.child("lists").child($scope.user.uid);
     var myObj = {
       body: $scope.uInput,
       userId: $scope.user.uid
@@ -74,5 +87,7 @@ app.controller('TestCtrl', ['$scope', '$http', '$firebase', function ($scope, $h
   $scope.signout = signout;
   $scope.log = log;
   $scope.signIn = signIn;
+  $scope.report = report;
+  $scope.deletePost = deletePost;
 
 }]);
