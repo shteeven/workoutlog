@@ -9,7 +9,7 @@ var app = angular.module('workoutLogApp');
 app.factory('Exercise', function () {
 });
 
-/*
+
 app.factory('UserService', function($q, $http) {
   var service = {
     _user: null,
@@ -27,14 +27,12 @@ app.factory('UserService', function($q, $http) {
       if (service._user) {
         d.resolve(service._user);
       } else {
-        gapi.client.oauth2.success( function() {
-            console.log("here");
-          }
-        );
-        gapi.client.oauth2.userinfo.get()
-          .execute(function(e) {
-            var email = e.email;
-          });
+        var authData = ref.getAuth();
+        if (authData) {
+          console.log("User " + authData.uid + " is logged in with " + authData.provider);
+        } else {
+          console.log("User is logged out");
+        }
       }
       return d.promise;
 
@@ -42,4 +40,3 @@ app.factory('UserService', function($q, $http) {
   };
   return service;
 });
-*/

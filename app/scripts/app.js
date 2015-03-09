@@ -8,7 +8,7 @@
  *
  * Main module of the application.
  */
-var app = angular.module('workoutLogApp', [
+angular.module('workoutLogApp', [
   'ngAnimate',
   'ngAria',
   'ngCookies',
@@ -21,14 +21,25 @@ var app = angular.module('workoutLogApp', [
   'firebase',
   'ngDraggable'
 ]);
+var app = angular.module('workoutLogApp');
 
-app.constant('FIREBASE_URI', 'https://finalize-test-app.firebaseIO.com/');
+app.constant('FIREBASE_URI', 'https://fiery-torch-1810.firebaseIO.com/');
 
 app.config(function ($routeProvider) {
   $routeProvider
     .when('/', {
       templateUrl: 'views/main.html',
-      controller: 'MainCtrl'
+      controller: 'MainCtrl',
+      resolve: {
+        userLists: function ($q, $timeout) { //todo write function to return user list data before ctrl runs
+          var defer = $q.defer;
+          defer.resolve(
+            
+          );
+
+          return defer.promise;
+        }
+      }
     })
     .when('/test', {
       templateUrl: 'views/test.html',
@@ -51,9 +62,11 @@ app.controller('appCtrl', ['$scope', '$location', function ($scope, $location) {
     for (var i = min; i <= max; i += step) {input.push(i);}
     return input;
   }
-
-  $scope.isActive = function (viewLocation) { return (viewLocation === $location.path());};
+  function isActive(viewLocation) {
+    return (viewLocation === $location.path());
+  }
 
   $scope.range = range;
+  $scope.isActive = isActive;
 
 }]);
