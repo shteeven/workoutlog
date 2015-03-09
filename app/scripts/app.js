@@ -23,23 +23,11 @@ angular.module('workoutLogApp', [
 ]);
 var app = angular.module('workoutLogApp');
 
-app.constant('FIREBASE_URI', 'https://fiery-torch-1810.firebaseIO.com/');
-
 app.config(function ($routeProvider) {
   $routeProvider
     .when('/', {
       templateUrl: 'views/main.html',
-      controller: 'MainCtrl',
-      resolve: {
-        userLists: function ($q, $timeout) { //todo write function to return user list data before ctrl runs
-          var defer = $q.defer;
-          defer.resolve(
-            
-          );
-
-          return defer.promise;
-        }
-      }
+      controller: 'MainCtrl'
     })
     .when('/test', {
       templateUrl: 'views/test.html',
@@ -54,19 +42,34 @@ app.config(function ($routeProvider) {
     });
 });
 
-app.controller('appCtrl', ['$scope', '$location', function ($scope, $location) {
+app.constant('FB_URI', 'https://fiery-torch-1810.firebaseIO.com/');
 
-  function range(min, max, step) {
-    step = step || 1;
-    var input = [];
-    for (var i = min; i <= max; i += step) {input.push(i);}
-    return input;
+app.controller('AppCtrl', ['$scope', '$location', 'FBUserService', function($scope, $location, FBUserService){
+  $scope.authWaiting = true;
+  FBUserService.currentUser();
+
+  var authObj = FBUserService.authObj();
+  authObj.$onAuth(function(authData) {
+    $scope.user = authData;
+  });
+
+  function signIn(type, email, password){
+    FBUserService.logIn(type);
+  }
+  function signOut(){
+    FBUserService.signOut();
+    $scope.user = undefined;
   }
   function isActive(viewLocation) {
     return (viewLocation === $location.path());
   }
+  function log(m){
+    console.log(m);
+  }
 
-  $scope.range = range;
+  $scope.signIn = signIn;
+  $scope.log = log;
   $scope.isActive = isActive;
+  $scope.signOut = signOut;
 
 }]);
