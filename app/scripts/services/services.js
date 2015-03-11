@@ -51,3 +51,5 @@ app.factory('FBUserService', function($q, FB_URI, $firebase, $firebaseAuth) {
   };
   return service;
 });
+
+
