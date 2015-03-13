@@ -52,6 +52,10 @@ app.controller('AppCtrl', ['$scope', '$location', 'FBUserService', function($sco
   authObj.$onAuth(function(authData) {
     $scope.user = authData;
   });
+  FBUserService.userData();
+  $scope.logClicked = function(){
+    $scope.check = !$scope.check;
+  };
 
   function signIn(type, email, password){
     FBUserService.logIn(type);

@@ -22,30 +22,36 @@
     <!-- Add your site or application content here -->
     <div ng-controller="AppCtrl" class="container">
 
-      <div class="header">
+      <div class="header row">
 
-        <ul class="nav nav-pills">
+        <ul class="nav nav-pills col-sm-9">
           <li ng-class="{ active: isActive('/')}"><a href="#/">Workout Log</a></li>
           <li ng-class="{ active: isActive('/test')}"><a href="#/test">Test</a></li>
           <li ng-class="{ active: isActive('/login')}"><a href="#/login">Login</a></li>
         </ul>
-        <div ng-hide="user" class="authPane">
-          <div class="userPane">
-            <form class="userInfo" ng-model="user.name"></form>
-            <form class="userInfo" ng-model="user.password"></form>
-            <button class="sign signIn" ng-click="signIn('userName', user)">Sign In</button>
-            <button class="sign signUp" ng-click="signIn('newUser', user)">Sign Up</button>
+
+        <div class="pull-right col-sm-3">
+          <div ng-if="user" class="userMarquee">
+            <p>{{user.google.displayName}}</p>
+            <button type="button" ng-click="signOut()" class="btn btn-xs btn-info">Log out</button>
           </div>
-          <div class="oAuthPane">
-            <button class="oauths" ng-click="signIn('facebook')">Facebook</button>
-            <button class="oauths" ng-click="signIn('google')">Google</button>
-            <button class="oauths" ng-click="signIn('github')">Github</button>
-            <button class="oauths" ng-click="signIn('twitter')">Twitter</button>
+          <button ng-if="!user" type="button" ng-click="logClicked()">Log In!</button>
+          <div ng-if="!user" ng-hide="!check" class="authPane">
+            <div class="userPane">
+              <form class="userInfo" ng-model="user.name"></form>
+              <form class="userInfo" ng-model="user.password"></form>
+              <button class="sign signIn" ng-click="signIn('userName', user)">Sign In</button>
+              <button class="sign signUp" ng-click="signIn('newUser', user)">Sign Up</button>
+            </div>
+            <div class="oAuthPane">
+              <button class="oauths" ng-click="signIn('facebook')">Facebook</button>
+              <button class="oauths" ng-click="signIn('google')">Google</button>
+              <button class="oauths" ng-click="signIn('github')">Github</button>
+              <button class="oauths" ng-click="signIn('twitter')">Twitter</button>
+            </div>
           </div>
         </div>
-        <div ng-hide="!user" class="authPane">
-          <button ng-click="signOut()" class="sign">Sign Out</button>
-        </div>
+
 
       </div>
 
