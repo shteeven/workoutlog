@@ -88,8 +88,31 @@ tr, .list-group-item {
 
 
 //+++++++++++++++++++++++++++++
-// Steve's fuck ups
-// +++++++++++++++++++++++++
-.authPane{
+// Authorization Styles
+// ++++++++++++++++++++++++++++
+.authPane_toggle {
+  font-size: 16px;
+  padding: 10px 15px;
+}
+
+.authPane {
+  width: 30em;
+  background-color: lighten(#31b0d5, 20%);
   position: absolute;
+  left: -5em;
+  z-index: 10;
+  padding: 0.5em;
+  border-radius: 4px;
+
+  .sign {
+    width: 5em;
+    float: right;
+  }
+
+  &__user {
+    overflow: auto;
+  }
+
+  &__oAuth {
+  }
 }
