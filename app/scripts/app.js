@@ -8,7 +8,7 @@
  *
  * Main module of the application.
  */
-var app = angular.module('workoutLogApp', [
+angular.module('workoutLogApp', [
   'ngAnimate',
   'ngAria',
   'ngCookies',
@@ -21,8 +21,7 @@ var app = angular.module('workoutLogApp', [
   'firebase',
   'ngDraggable'
 ]);
-
-app.constant('FIREBASE_URI', 'https://finalize-test-app.firebaseIO.com/');
+var app = angular.module('workoutLogApp');
 
 app.config(function ($routeProvider) {
   $routeProvider
@@ -43,17 +42,38 @@ app.config(function ($routeProvider) {
     });
 });
 
-app.controller('appCtrl', ['$scope', '$location', function ($scope, $location) {
+app.constant('FB_URI', 'https://fiery-torch-1810.firebaseIO.com/');
 
-  function range(min, max, step) {
-    step = step || 1;
-    var input = [];
-    for (var i = min; i <= max; i += step) {input.push(i);}
-    return input;
+app.controller('AppCtrl', ['$scope', '$location', 'FBUserService', function($scope, $location, FBUserService){
+  $scope.authWaiting = true;
+  FBUserService.currentUser();
+
+  var authObj = FBUserService.authObj();
+  authObj.$onAuth(function(authData) {
+    $scope.user = authData;
+  });
+  FBUserService.userData();
+  $scope.logClicked = function(){
+    $scope.check = !$scope.check;
+  };
+
+  function signIn(type, email, password){
+    FBUserService.logIn(type);
+  }
+  function signOut(){
+    FBUserService.signOut();
+    $scope.user = undefined;
+  }
+  function isActive(viewLocation) {
+    return (viewLocation === $location.path());
+  }
+  function log(m){
+    console.log(m);
   }
 
-  $scope.isActive = function (viewLocation) { return (viewLocation === $location.path());};
-
-  $scope.range = range;
+  $scope.signIn = signIn;
+  $scope.log = log;
+  $scope.isActive = isActive;
+  $scope.signOut = signOut;
 
 }]);

@@ -9,9 +9,22 @@
     <button class="btn" ng-click="signout()">Sign Out</button>
   </div>
 </div>
-
+<br>
 <input ng-model="uInput" type="text">
 <button ng-click="doIt()">report</button>
+<br>
+<button ng-click="log(sync2)">readData</button>
+<div ng-repeat="users in sync2">
+  <h4>User ID: {{users.$id}} </h4>
+  <div ng-repeat="(key, value) in users">
+    <p>Body: {{value.body}}</p>
+    <button ng-click="deleteItem(users, key)">Delete</button>
+  </div>
+</div>
+<br>
+
+
+
 
 <div ng-show="user">
   <pre>{{ user | json }}</pre>

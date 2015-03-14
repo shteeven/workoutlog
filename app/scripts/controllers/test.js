@@ -8,10 +8,14 @@ var app = angular.module('workoutLogApp');
 app.controller('TestCtrl', ['$scope', '$http', '$firebase', function ($scope, $http, $firebase) {
   $scope.uInput = '';
 
-  //$scope.clientId = '120364084226-vqepl1idscd31900dlo880enf9n9hbd2';
+  var url = 'https://fiery-torch-1810.firebaseio.com';
 
-  var ref = new Firebase("https://fiery-torch-1810.firebaseio.com");
-  var isNewUser = false;
+  var ref = new Firebase(url);
+  var ref2 = new Firebase(url+ '/lists');
+
+  $scope.sync2 = $firebase(ref2).$asArray();
+
+
   ref.onAuth(function(authData) {
     if (authData && isNewUser) {
       // save the user's profile into Firebase so we can list users,
@@ -22,6 +26,15 @@ app.controller('TestCtrl', ['$scope', '$http', '$firebase', function ($scope, $h
       });
     }
   });
+  var isNewUser = false;
+
+  function report(){
+    console.log($scope.readData)
+  }
+
+  function deletePost(post){
+    var postKey = post.key();
+  }
   function signIn(){
     ref.authWithOAuthPopup("google", function(error, authData) {
       if (error) { console.log("Login Failed!", error);}
@@ -57,7 +70,7 @@ app.controller('TestCtrl', ['$scope', '$http', '$firebase', function ($scope, $h
     console.log(m);
   }
   function doIt() {
-    var usersLists = ref.child("lists");
+    var usersLists = ref.child("lists").child($scope.user.uid);
     var myObj = {
       body: $scope.uInput,
       userId: $scope.user.uid
@@ -65,7 +78,13 @@ app.controller('TestCtrl', ['$scope', '$http', '$firebase', function ($scope, $h
     usersLists.push(myObj);
     console.log(myObj);
     console.log('what');
-
+  }
+  function deleteItem(user, key){
+    log(user);
+    log(key);
+    log(user[key]);
+    var itemRef = new Firebase(url + '/lists/' + user.$id + '/' + key);
+    itemRef.remove();
   }
 
 
@@ -74,5 +93,8 @@ app.controller('TestCtrl', ['$scope', '$http', '$firebase', function ($scope, $h
   $scope.signout = signout;
   $scope.log = log;
   $scope.signIn = signIn;
+  $scope.report = report;
+  $scope.deletePost = deletePost;
+  $scope.deleteItem = deleteItem;
 
 }]);
