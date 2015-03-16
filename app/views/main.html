@@ -56,7 +56,7 @@
 
         <td>
           {{obj.reps}}
-          <select ng-model="obj.reps" ng-change="saveChanges(obj)" ng-options="n for n in range(0,100)" class="col-xs-8"></select>
+          <select ng-model="obj.reps" ng-change="saveChanges(obj)" ng-options="n for n in [] | range:1:30" class="col-xs-8"></select>
         </td>
 
         <td>

@@ -20,15 +20,14 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <div ng-controller="AppCtrl" class="container">
+    <div ng-controller="AppCtrl">
 
       <div class="header row">
         <!-- Navigation Menu -->
-        <ul class="nav nav-pills col-sm-9">
+        <ul class="nav nav-pills vcenter">
           <li ng-class="{ active: isActive('/')}"><a href="#/">Workout Log</a></li>
           <li ng-class="{ active: isActive('/test')}"><a href="#/test">Test</a></li>
           <li ng-class="{ active: isActive('/login')}"><a href="#/login">Login</a></li>
-          <li ng-class="{ active: isActive('/home')}"><a href="#/home">Home</a></li>
           <li ng-class="{ active: isActive('/mypage')}"><a href="#/mypage">My Page</a></li>
           <li ng-class="{ active: isActive('/create')}"><a href="#/create">Create</a></li>
           <li ng-class="{ active: isActive('/browse')}"><a href="#/browse">Browse</a></li>
@@ -38,26 +37,22 @@
           <li class="pull-right">
             <!-- If the person is signed in -->
             <div ng-if="user" class="userMarquee">
-              <p>{{user.google.displayName}}</p>
-              <button type="button" class="btn btn-xs btn-info authPane_toggle" ng-click="signOut()">Log out</button>
+                {{user.google.displayName}}
+                <a href="#/" ng-click="signOut()">Log out</a>
             </div>
 
             <!-- If the person is not signed in -->
             <button type="button" class="btn btn-xs btn-info authPane_toggle" ng-if="!user" ng-click="logClicked()">Log In!</button>
             <div ng-if="!user" ng-hide="!check" class="authPane">
               <div class="authPane__user">
-
-                <!-- I don't know what these form tags are for. -->
-                <!-- <form class="userInfo" ng-model="user.name"></form>
-                <form class="userInfo" ng-model="user.password"></form> -->
                 
                 <!-- User Name Input -->
                 <label class="sr-only" for="userName">User Name</label>
-                <input type="text" id="userName" placeholder="User Name">
+                <input type="text" id="userName" ng-model="user.name" placeholder="User Name">
 
                 <!-- Password Input -->
                 <label class="sr-only" for="password">Password</label>
-                <input type="password" id="password" placeholder="Password">
+                <input type="password" id="password" ng-model="user.password" placeholder="Password">
                 
                 <!-- Sign In and Sign Up Buttons -->
                 <button class="sign signIn" ng-click="signIn('userName', user)">Sign In</button>
@@ -76,11 +71,15 @@
           </li>
           <!-- End of Log In form -->
         </ul>
+        <div class="place vcenter"></div>
+
         <!-- End of Navigation Menu -->
 
       </div> <!-- /.header -->
 
-      <div class="row" ng-view=""></div>
+      <div class="container view">
+        <div class="row" ng-view=""></div>
+      </div>
 
       <div class="footer">
         <p><span class="glyphicon glyphicon-heart"></span> from the Yeoman team</p>
@@ -111,18 +110,7 @@
     <!-- bower:js -->
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/angular/angular.js"></script>
-    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/affix.js"></script>
-    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/alert.js"></script>
-    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/button.js"></script>
-    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/carousel.js"></script>
-    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/collapse.js"></script>
-    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/dropdown.js"></script>
-    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/tab.js"></script>
-    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/transition.js"></script>
-    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/scrollspy.js"></script>
-    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/modal.js"></script>
-    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/tooltip.js"></script>
-    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/popover.js"></script>
+    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap.js"></script>
     <script src="bower_components/angular-animate/angular-animate.js"></script>
     <script src="bower_components/angular-aria/angular-aria.js"></script>
     <script src="bower_components/angular-cookies/angular-cookies.js"></script>
@@ -139,13 +127,15 @@
     <!-- endbower -->
     <!-- endbuild -->
 
-        <!-- build:js({.tmp,app}) scripts/scripts.js -->
-        <script src="scripts/app.js"></script>
-        <script src="scripts/controllers/main.js"></script>
-        <script src="scripts/controllers/test.js"></script>
-        <script src="scripts/controllers/login.js"></script>
-        <script src="scripts/directives/directives.js"></script>
-        <script src="scripts/services/services.js"></script>
+    <!-- build:js({.tmp,app}) scripts/scripts.js -->
+    <script src="scripts/app.js"></script>
+    <script src="scripts/controllers/main.js"></script>
+    <script src="scripts/controllers/test.js"></script>
+    <script src="scripts/controllers/login.js"></script>
+    <script src="scripts/directives/directives.js"></script>
+    <script src="scripts/services/services.js"></script>
+    <script src="scripts/filters/filters.js"></script>
+
 
     <!-- endbuild -->
 </body>

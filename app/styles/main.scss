@@ -3,6 +3,23 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
 @import "bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
 // endbower
 
+//+++++++++++++++++++++++++++++
+// Reset Styles
+//++++++++++++++++++++++++++++
+body{
+  margin: 0;
+  padding: 0;
+}
+
+//+++++++++++++++++++++++++++++
+// View Styles
+//++++++++++++++++++++++++++++
+.view{
+  margin: 50px;
+}
+
+
+
 .browsehappy {
   margin: 0.2em 0;
   background: #ccc;
@@ -80,12 +97,42 @@ tr, .list-group-item {
   opacity: 0.5;
 }
 
-// Header styles
+//+++++++++++++++++++++++++++++
+// Header Styles
+//++++++++++++++++++++++++++++
 .header {
-  font-size: 16px;
-  margin-bottom: 20px;
-}
+  height: 55px;
+  background: #1caff6;
+  background-color: rgba(32,166,231,0.8);
+  background-image: linear-gradient(to bottom, #20a8e9, rgba(30,158,220,0.5));
+  background-repeat: repeat-x;
+  position:fixed;
+  top: 0;
+  width: 100%;
+  z-index: 999;
+  padding-left: 50px;
 
+  .nav > li > a{
+    color: #ffffff;
+  }
+  .nav > li > a:hover, .nav > li > a:focus{
+    border-radius: 200px;
+    background:#1493d1;
+  }
+  .nav-pills > li.active > a{
+    border-radius: 200px;
+    background:#1493d1;
+  }
+}
+.vcenter.nav{
+  width: 98%;
+}
+.vcenter {
+  display: inline-block;
+  vertical-align: middle;
+  float: none;
+}
+.place{height: 55px}
 
 //+++++++++++++++++++++++++++++
 // Authorization Styles
