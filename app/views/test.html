@@ -30,3 +30,79 @@
   <pre>{{ user | json }}</pre>
 </div>
 
+<button ng-click="report()">priority</button>
+<div class="row">
+  <button class="btn btn-default" ng-click="edit = !edit">{{edit ? "Finish":"Edit"}}</button>
+
+  <div ng-if="edit" class="col-xs-12">
+    <button ng-click="report(fireData)">report</button>
+    <input ng-keyup="$event.keyCode == 13 ? createItem(itemName) : null" ng-model="itemName" placeholder="workout name">
+    <button ng-click="createItem(itemName); itemName=''">add</button>
+  </div>
+</div>
+<button ng-click="report(fireData2)">Here I am</button>
+
+<div class="row">
+  <!-- Small left panel -->
+  <div class="panel panel-primary col-xs-12 col-sm-4">
+    <ul class="list-group draggable-objects clone-holder">
+      <li  ng-repeat="obj in fireData2" class="row list-group-item drag-object">
+        <div class="col-xs-11">
+          <div ng-drag="true" ng-drag-data="obj">{{obj.name}}</div>
+        </div>
+        <div class="add-delete-button col-xs-1">
+          <div ng-if="!edit" class="glyphicon glyphicon-plus-sign" ng-click="addItemToList(obj)"></div>
+          <div ng-if="edit" class="glyphicon glyphicon-ban-circle" ng-click="deleteItemFromMainList(obj)"></div>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Main right panel -->
+  <div class="panel panel-primary col-xs-12 col-sm-8">
+
+    <table class="table table-striped table-hover col-xs-8">
+      <thead>
+      <tr>
+        <th>Order</th>
+        <th>Order</th>
+        <th>Type</th>
+        <th>Radio</th>
+        <th>Select</th>
+        <th> </th>
+      </tr>
+      </thead>
+      <tbody>
+
+      <tr ng-repeat="obj in fireData" ng-drop="true" ng-drop-success="onDropComplete($index, $data,$event)">
+
+        <td draggable="true" ng-drag="true" ng-drag-data="obj">
+          <span class="glyphicon glyphicon-move"></span><div class="drag-name">{{obj.name}}</div>
+        </td>
+
+        <td>{{obj.name}}</td>
+
+        <td>{{obj.type}}</td>
+
+        <td><input type="checkbox" ng-change="saveChanges(obj)" ng-model="obj.completed"></td>
+
+        <td>
+          {{obj.reps}}
+          <select ng-model="obj.reps" ng-change="saveChanges(obj)" ng-options="n for n in [] | range:1:30" class="col-xs-8"></select>
+        </td>
+
+        <td>
+          <div class="" ng-click="deleteItemFromList(obj)">
+            <span class="glyphicon glyphicon-remove"></span>
+          </div>
+        </td>
+      </tr>
+
+      </tbody>
+
+    </table> <!-- /Table -->
+
+  </div> <!-- /Main right panel -->
+
+</div> <!-- /.row -->
+

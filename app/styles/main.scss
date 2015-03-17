@@ -30,74 +30,9 @@ ul, li, button {
   padding: 0;
 }
 
-/* Remove focus outlines */
-button, .glyphicon {
-  outline: none;
-}
-
-/* Keep list and row from collapsing when item's dragged */
-tr, .list-group-item {
-  height: 4.5rem;
-  line-height: 2.5;
-}
-
-/* A hack-ish way to center table content vertically because Bootstrap specificity is too high */
-.table > tbody > tr > td {
-  vertical-align: middle;
-}
-
-*{
-  -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
-}
-[ng-drag], select, div, .glyphicon{
-  -moz-user-select: -moz-none;
-  -khtml-user-select: none;
-  -webkit-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
-[draggable] {
-  cursor: move;
-
-  span {
-    font-size: 2.0em;
-  }
-}
-
-.add-delete-button {
-  cursor: pointer;
-  float: right;
-}
-
-.drag-name{
-  display: none;
-}
-//some classes that are applied via ng-drag directive
-//use as needed
-.drag-enter{ //applied to <tr> when drag object enters it
-  -webkit-box-shadow: 0px 0px 27px 4px rgba(0,0,0,0.55);
-  -moz-box-shadow: 0px 0px 27px 4px rgba(0,0,0,0.55);
-  box-shadow: 0px 0px 27px 4px rgba(0,0,0,0.55);
-  overflow: visible;
-}
-.dragging{ //applied to the <td> that is being dragged
-  .drag-name{
-    display: inline-block;
-    opacity: 0.5;
-  }
-  .add-delete-button{
-    display: none;
-  }
-}
-
-.table-striped > tbody > tr:nth-child(odd).drag-enter, .drag-enter {
-  opacity: 0.5;
-}
-
 //+++++++++++++++++++++++++++++
 // Header Styles
-//++++++++++++++++++++++++++++
+//+++++++++++++++++++++++++++++
 .header {
   height: 55px;
   background: #1caff6;
@@ -134,7 +69,7 @@ tr, .list-group-item {
 
 //+++++++++++++++++++++++++++++
 // Authorization Styles
-// ++++++++++++++++++++++++++++
+//+++++++++++++++++++++++++++++
 .authPane_toggle {
   font-size: 16px;
   padding: 10px 15px;
