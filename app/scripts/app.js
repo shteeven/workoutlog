@@ -29,14 +29,27 @@ app.config(function ($routeProvider) {
       templateUrl: 'views/main.html',
       controller: 'MainCtrl'
     })
+    .when('/mypage', {
+      templateUrl: 'views/mypage.html',
+      controller: 'MyPageCtrl'
+    })
+    .when('/create', {
+      templateUrl: 'views/create.html',
+      controller: 'CreateCtrl'
+    })
+    .when('/browse', {
+      templateUrl: 'views/browse.html',
+      controller: 'BrowseCtrl'
+    })
+    .when('/discuss', {
+      templateUrl: 'views/discuss.html',
+      controller: 'DiscussCtrl'
+    })
     .when('/test', {
       templateUrl: 'views/test.html',
       controller: 'TestCtrl'
     })
-    .when('/login', {
-      templateUrl: 'views/login.html',
-      controller: 'LoginCtrl'
-    })
+
     .otherwise({
       redirectTo: '/'
     });
