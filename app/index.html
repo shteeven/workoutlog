@@ -22,7 +22,7 @@
     <!-- Add your site or application content here -->
     <div ng-controller="AppCtrl">
 
-      <div class="header row">
+      <div class="header">
         <!-- Navigation Menu -->
         <ul class="nav nav-pills vcenter">
           <li ng-class="{ active: isActive('/')}"><a href="#/">Workout Log</a></li>
@@ -37,7 +37,7 @@
           <li class="pull-right">
             <!-- If the person is signed in -->
             <div ng-if="user" class="userMarquee">
-                {{user.google.displayName}}
+                {{user.name}}
                 <a href="#/" ng-click="signOut()">Log out</a>
             </div>
 
@@ -78,7 +78,7 @@
       </div> <!-- /.header -->
 
       <div class="container view">
-        <div class="row" ng-view=""></div>
+        <div class="" ng-view=""></div>
       </div>
 
       <div class="footer">

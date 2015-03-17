@@ -51,10 +51,30 @@ app.controller('AppCtrl', ['$scope', '$location', 'FBUserService', function($sco
   var authObj = FBUserService.authObj();
   authObj.$onAuth(function(authData) {
     $scope.user = authData;
+    if ($scope.user){
+      $scope.user.name = FBUserService.userData(authData);
+    }
   });
-  FBUserService.userData();
   $scope.logClicked = function(){
     $scope.check = !$scope.check;
+  };
+
+  $scope.colorMe = function(id) {
+    var c;
+    switch(id) {
+      case 'facebook':
+        c = 'btn-primary';
+        break;
+      case 'github':
+        c = 'btn-inverse';
+        break;
+      case 'twitter':
+        c = 'btn-info';
+        break;
+      default:
+        c = '';
+    }
+    return !$scope.preferred || $scope.preferred.id === id? c : '';
   };
 
   function signIn(type, email, password){

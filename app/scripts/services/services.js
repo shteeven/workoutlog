@@ -48,15 +48,17 @@ app.factory('FBUserService', function($q, FB_URI, $firebase, $firebaseAuth) {
     authObj: function(){
       return auth;
     },
-    userData: function(){
-      if (service._user){
-        switch (service._user.provider) {
-          case 'anonymous'      : return this.loginAnonymously(options);
-          case 'facebook-token' : return this.loginWithFacebookToken(options);
-          case 'github'         : return this.loginWithGithub(options);
-          case 'google'   : return console.log('google');
-          case 'password'       : return this.loginWithPassword(options);
-          case 'twitter-token'  : return this.loginWithTwitterToken(options);
+    userData: function(user){
+      if (user){
+        switch(user.provider) {
+          case 'password':
+            return user.password.email.replace(/@.*/, '');
+          case 'twitter':
+            return user.twitter.displayName;
+          case 'facebook':
+            return user.facebook.displayName;
+          case 'google':
+            return user.google.displayName;
         }
       }
     }
