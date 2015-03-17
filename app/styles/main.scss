@@ -48,11 +48,9 @@ ul, li, button {
   .nav > li > a{
     color: #ffffff;
   }
-  .nav > li > a:hover, .nav > li > a:focus{
-    border-radius: 200px;
-    background:#1493d1;
-  }
-  .nav-pills > li.active > a{
+  .nav-pills > li.active > a,
+  .nav > li > a:hover,
+  .nav > li > a:focus{
     border-radius: 200px;
     background:#1493d1;
   }
@@ -71,18 +69,24 @@ ul, li, button {
 // Authorization Styles
 //+++++++++++++++++++++++++++++
 .authPane_toggle {
-  font-size: 16px;
+  border-radius: 200px;
+  background:#1493d1;
+  //font-size: 16px;
   padding: 10px 15px;
 }
 
 .authPane {
   width: 30em;
-  background-color: lighten(#31b0d5, 20%);
   position: absolute;
-  left: -5em;
+  right:0;
   z-index: 10;
   padding: 0.5em;
+  border: 1px #1493d1 solid;
   border-radius: 4px;
+  background: #1caff6;
+  background-color: rgba(32,166,231,0.8);
+  background-image: linear-gradient(to bottom, #20a8e9, rgba(30,158,220,0.5));
+  background-repeat: repeat-x;
 
   .sign {
     width: 5em;

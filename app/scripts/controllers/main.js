@@ -11,4 +11,11 @@ var app = angular.module('workoutLogApp');
 
 app.controller('MainCtrl', ['$scope', '$firebase', function ($scope, $firebase) {
 
+  function log(m){
+    console.log(m)
+  }
+
+
+  $scope.log = log;
+
 }]);

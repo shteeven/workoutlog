@@ -42,30 +42,32 @@
             </div>
 
             <!-- If the person is not signed in -->
-            <button type="button" class="btn btn-xs btn-info authPane_toggle" ng-if="!user" ng-click="logClicked()">Log In!</button>
-            <div ng-if="!user" ng-hide="!check" class="authPane">
-              <div class="authPane__user">
-                
-                <!-- User Name Input -->
-                <label class="sr-only" for="userName">User Name</label>
-                <input type="text" id="userName" ng-model="user.name" placeholder="User Name">
+            <div class="" ng-if="!user">
+              <div class="btn btn-xs btn-info authPane_toggle" ng-click="toggleModal()">Login</div>
+              <div ng-hide="!check" class="authPane">
+                <div class="authPane__user">
 
-                <!-- Password Input -->
-                <label class="sr-only" for="password">Password</label>
-                <input type="password" id="password" ng-model="user.password" placeholder="Password">
-                
-                <!-- Sign In and Sign Up Buttons -->
-                <button class="sign signIn" ng-click="signIn('userName', user)">Sign In</button>
-                <button class="sign signUp" ng-click="signIn('newUser', user)">Sign Up</button>
-              </div>
-              
-              <!-- Authorize with Other Accounts -->
-              <p>Sign in with:</p>
-              <div class="authPane__oAuth">
-                <button class="oauths" ng-click="signIn('facebook')">Facebook</button>
-                <button class="oauths" ng-click="signIn('google')">Google</button>
-                <button class="oauths" ng-click="signIn('github')">Github</button>
-                <button class="oauths" ng-click="signIn('twitter')">Twitter</button>
+                  <!-- User Name Input -->
+                  <label class="sr-only" for="userName">User Name</label>
+                  <input type="text" id="userName" ng-model="user.name" placeholder="User Name">
+
+                  <!-- Password Input -->
+                  <label class="sr-only" for="password">Password</label>
+                  <input type="password" id="password" ng-model="user.password" placeholder="Password">
+
+                  <!-- Sign In and Sign Up Buttons -->
+                  <button class="sign signIn" ng-click="signIn('userName', user)">Sign In</button>
+                  <button class="sign signUp" ng-click="signIn('newUser', user)">Sign Up</button>
+                </div>
+
+                <!-- Authorize with Other Accounts -->
+                <p>Sign in with:</p>
+                <div class="authPane__oAuth">
+                  <button class="oauths" ng-click="signIn('facebook')">Facebook</button>
+                  <button class="oauths" ng-click="signIn('google')">Google</button>
+                  <button class="oauths" ng-click="signIn('github')">Github</button>
+                  <button class="oauths" ng-click="signIn('twitter')">Twitter</button>
+                </div>
               </div>
             </div>
           </li>
