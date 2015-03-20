@@ -45,6 +45,10 @@ ul, li, button {
   z-index: 999;
   padding: 0 50px;
 
+  .nav{
+    width: 99%; //100% pushes the placeholder for vcenter to the next row; breaks the layout.
+  }
+
   .nav > li > a{
     color: #ffffff;
   }
@@ -55,9 +59,7 @@ ul, li, button {
     background:#1493d1;
   }
 }
-.vcenter.nav{
-  width: 98%;
-}
+
 .vcenter {
   display: inline-block;
   vertical-align: middle;
@@ -69,34 +71,7 @@ ul, li, button {
 // Authorization Styles
 //+++++++++++++++++++++++++++++
 .authPane_toggle {
-  border-radius: 200px;
+  border-radius: 30px;
   background:#1493d1;
-  //font-size: 16px;
   padding: 10px 15px;
-}
-
-.authPane {
-  width: 30em;
-  position: absolute;
-  right:0;
-  z-index: 10;
-  padding: 0.5em;
-  border: 1px #1493d1 solid;
-  border-radius: 4px;
-  background: #1caff6;
-  background-color: rgba(32,166,231,0.8);
-  background-image: linear-gradient(to bottom, #20a8e9, rgba(30,158,220,0.5));
-  background-repeat: repeat-x;
-
-  .sign {
-    width: 5em;
-    float: right;
-  }
-
-  &__user {
-    overflow: auto;
-  }
-
-  &__oAuth {
-  }
 }

@@ -70,7 +70,6 @@ app.directive('modal', function () {
     restrict: 'E',
     transclude: true,
     replace:true,
-    scope:true,
     link: function postLink(scope, element, attrs) {
       scope.title = attrs.title;
 

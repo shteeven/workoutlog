@@ -111,11 +111,7 @@ app.controller('AppCtrl', ['$scope', '$location', 'FBUserService', function($sco
 
   $scope.showModal = false;
   $scope.toggleModal = function(){
-    log($scope.showModal);
     $scope.showModal = !$scope.showModal;
-    log('here');
-    log($scope.showModal);
-
   };
 
 }]);
