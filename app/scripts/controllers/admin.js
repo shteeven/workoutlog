@@ -5,12 +5,12 @@
 
 var app = angular.module('workoutLogApp');
 
-app.controller('MyPageCtrl', ['$scope', function ($scope) {
+app.controller('AdminCtrl', ['$scope', function ($scope) {
 
   //=================
   //assignments and declarations
   //=================
-  var info = 'MyPage';
+  var info = 'Admin';
   $scope.pageInfo = 'this is the ' +info+ ' page';
 
   //=================

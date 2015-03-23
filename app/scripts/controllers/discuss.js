@@ -1,6 +1,5 @@
 'use strict';
-/*global Firebase */
-/**
+/*
  * Created by Shtav.
  */
 

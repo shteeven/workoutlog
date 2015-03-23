@@ -49,7 +49,10 @@ app.config(function ($routeProvider) {
       templateUrl: 'views/test.html',
       controller: 'TestCtrl'
     })
-
+    .when('/admin', {
+      templateUrl: 'views/admin.html',
+      controller: 'AdminCtrl'
+    })
     .otherwise({
       redirectTo: '/'
     });
@@ -91,7 +94,7 @@ app.controller('AppCtrl', ['$scope', '$location', 'FBUserService', function($sco
   };
 
   function signIn(type, email, password){
-    FBUserService.logIn(type);
+    FBUserService.logIn(type, email, password);
   }
   function signOut(){
     FBUserService.signOut();

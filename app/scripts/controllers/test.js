@@ -5,7 +5,7 @@
 
 var app = angular.module('workoutLogApp');
 
-app.controller('TestCtrl', ['$scope', '$http', '$firebase', function ($scope, $http, $firebase) {
+app.controller('TestCtrl', ['$scope', '$http', '$firebase', '$firebaseArray', function ($scope, $http, $firebase, $firebaseArray) {
   $scope.uInput = '';
 
   var url = 'https://fiery-torch-1810.firebaseio.com';
@@ -13,14 +13,14 @@ app.controller('TestCtrl', ['$scope', '$http', '$firebase', function ($scope, $h
   var ref = new Firebase(url);
   var ref2 = new Firebase(url+ '/lists');
 
-  $scope.sync2 = $firebase(ref2).$asArray();
+  $scope.sync2 = $firebaseArray(ref2);
 
 
   ref.onAuth(function(authData) {
     if (authData && isNewUser) {
       // save the user's profile into Firebase so we can list users,
       // use them in Security and Firebase Rules, and show profiles
-      ref.child("users").child(authData.uid).set({
+      ref.child('users').child(authData.uid).set({
         provider: authData.provider,
         name: getName(authData)
       });
@@ -28,21 +28,22 @@ app.controller('TestCtrl', ['$scope', '$http', '$firebase', function ($scope, $h
   });
   var isNewUser = false;
 
-  function report(){
-    console.log($scope.readData)
+  function report(m){
+    console.log(m);
   }
 
   function deletePost(post){
     var postKey = post.key();
+    $scope.sync2[postKey].$remove();
   }
   function signIn(){
-    ref.authWithOAuthPopup("google", function(error, authData) {
-      if (error) { console.log("Login Failed!", error);}
+    ref.authWithOAuthPopup('google', function(error, authData) {
+      if (error) { console.log('Login Failed!', error);}
       else {
-        console.log("Authenticated successfully with payload:", authData);
+        console.log('Authenticated successfully with payload:', authData);
         $scope.$apply(function(){$scope.user = authData;});
       }
-    })
+    });
   }
   function getName(authData) {
     switch(authData.provider) {
@@ -56,10 +57,10 @@ app.controller('TestCtrl', ['$scope', '$http', '$firebase', function ($scope, $h
         return authData.google.displayName;
     }
   }
-  function disconnectUser(access_token) {
-    var revokeUrl = 'https://accounts.google.com/o/oauth2/revoke?token=' + access_token + '&callback=JSON_CALLBACK';
+  function disconnectUser(accessToken) {
+    var revokeUrl = 'https://accounts.google.com/o/oauth2/revoke?token=' + accessToken + '&callback=JSON_CALLBACK';
     $http.jsonp(revokeUrl)
-      .success( function(nullResponse) {$scope.user = undefined;})
+      .success( function(nullResponse) {$scope.user = nullResponse;})
       .error(function(err) {console.log(err);});
   }
   function signout(){
@@ -70,7 +71,7 @@ app.controller('TestCtrl', ['$scope', '$http', '$firebase', function ($scope, $h
     console.log(m);
   }
   function doIt() {
-    var usersLists = ref.child("lists").child($scope.user.uid);
+    var usersLists = ref.child('lists').child($scope.user.uid);
     var myObj = {
       body: $scope.uInput,
       userId: $scope.user.uid
@@ -93,7 +94,6 @@ app.controller('TestCtrl', ['$scope', '$http', '$firebase', function ($scope, $h
   $scope.signout = signout;
   $scope.log = log;
   $scope.signIn = signIn;
-  $scope.report = report;
   $scope.deletePost = deletePost;
   $scope.deleteItem = deleteItem;
 
@@ -106,20 +106,15 @@ app.controller('TestCtrl', ['$scope', '$http', '$firebase', function ($scope, $h
   //=================
   //assignments and declarations
   //=================
-  var ref = new Firebase('https://finalize-test-app.firebaseIO.com/-JcrRUkOOoyEq7YGldxt');
-  var ref2 = new Firebase('https://finalize-test-app.firebaseIO.com/Main-List');
+  var ref3 = new Firebase('https://finalize-test-app.firebaseIO.com/-JcrRUkOOoyEq7YGldxt');
+  var ref4 = new Firebase('https://finalize-test-app.firebaseIO.com/Main-List');
 
-  var sync = $firebase(ref.orderByChild('priority'));
-  var sync2 = $firebase(ref2.orderByChild('priority'));
-
-  $scope.fireData = sync.$asArray();
-  $scope.fireData2 = sync2.$asArray();
+  $scope.fireData = $firebaseArray(ref3.orderByChild('priority'));
+  $scope.fireData2 = $firebaseArray(ref4.orderByChild('priority'));
 
   //=================
   //functions
   //=================
-  function report(message){console.log(message);}
-
 
   function createItem(name){
     var priority;
